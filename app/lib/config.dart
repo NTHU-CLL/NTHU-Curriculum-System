@@ -1,1 +1,0 @@
-String titleName = "NTHU Curriculum 課程系統";

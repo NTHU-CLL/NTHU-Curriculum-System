@@ -1,3 +1,8 @@
 {
-  "title" : "NTHU 課程查詢系統"
+  "title": "NTHU 課程查詢系統",
+  "lang_en": "英文",
+  "lang_zh": "中文",
+  "basic_query": "基本查詢",
+  "department_query": "系級查詢",
+  "advanced_query": "進階查詢"
 }
