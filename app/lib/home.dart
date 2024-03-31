@@ -1,3 +1,5 @@
+import 'color.dart';
+import 'object.dart';
 import 'material.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -11,57 +13,77 @@ class HomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<HomePage> {
+  ThemeMode mainThemeMode = ThemeMode.system;
+
   @override
   Widget build(BuildContext context) {
+    bool isLight = mainThemeMode != ThemeMode.dark;
     bool isMobile = Device.screenType == ScreenType.mobile;
-    bool isEnglish = context.locale == const Locale('en', 'US');
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('title').tr(),
-        actions: [
-          TextButton(
-            onPressed: () {
-              context.setLocale(isEnglish ? const Locale('zh', 'TW') : const Locale('en', 'US'));
-            },
-            child: Text(
-              isEnglish ? tr('lang_zh') : tr('lang_en'),
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 12.sp,
-              ),
+    return MaterialApp(
+      title: "NTHU Curriculum 課程系統",
+      theme: getTheme(true),
+      darkTheme: getTheme(false),
+      themeMode: mainThemeMode,
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme
+              .of(context)
+              .appBarTheme
+              .backgroundColor,
+          title: const Text('title').tr(),
+          actions: [
+            IconButton(
+              icon: Icon(isLight ? Icons.light_mode : Icons.dark_mode),
+              onPressed: () {
+                setState(() {
+                  mainThemeMode = isLight ? ThemeMode.dark : ThemeMode.light;
+                });
+              },
             ),
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          margin: EdgeInsets.symmetric(vertical: 3.h, horizontal: isMobile ? 5.w : 20.w),
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.all(3.h),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(
-                    color: Theme.of(context).colorScheme.primary,
-                    width: 2,
-                  ),
+            SizedBox(width: 0.5.w),
+            dropDownButton(
+              Icon(Icons.language, size: 14.sp),
+              [
+                ButtonItem(
+                  name: tr('lang_en'),
+                  onPressed: () {
+                    context.setLocale(const Locale('en', 'US'));
+                  },
                 ),
-                child: Column(
-                  children: [
+                ButtonItem(
+                  name: tr('lang_zh'),
+                  onPressed: () {
+                    context.setLocale(const Locale('zh', 'TW'));
+                  },
+                ),
+              ],
+            ),
+            SizedBox(width: 2.w),
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.symmetric(vertical: 3.h, horizontal: isMobile ? 5.w : 20.w),
+            child: Column(
+              children: [
+                roundBorder(
+                  [
+                    titleContent(
+                      tr('department_query'),
+                      const Text("department_query"),
+                    ),
                     titleContent(
                       tr('basic_query'),
                       const Text("basic_query"),
                     ),
-                    titleContent(
-                      tr('department_query'),
-                      const Text("basic_query"),
-                    ),
                   ],
                 ),
-              )
-            ],
+              ],
+            ),
           ),
         ),
       ),
