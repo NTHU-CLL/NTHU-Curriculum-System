@@ -1,40 +1,10 @@
-import 'package:easy_localization/easy_localization.dart';
-
-import 'object.dart';
+import '../object.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:easy_localization/easy_localization.dart';
 
-Widget dropDownButton(bool isLight, Icon icon, List<ButtonItem> texts) {
-  return DropdownButtonHideUnderline(
-    child: DropdownButton2(
-      customButton: Container(padding: const EdgeInsets.all(10), child: icon),
-      items: texts.map((ButtonItem item) {
-        return DropdownMenuItem(
-          value: item.name,
-          onTap: item.onPressed,
-          child: Text(
-            item.name,
-            style: TextStyle(fontSize: 11.sp, color: isLight ? Colors.black : Colors.white),
-          ),
-        );
-      }).toList(),
-      onChanged: (String? value) {},
-      dropdownStyleData: DropdownStyleData(
-        width: 5.w,
-        offset: Offset(-1.2.w, -0.5.h),
-        decoration: BoxDecoration(
-          color: isLight ? Colors.white : Colors.black,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: isLight ? Colors.black : Colors.white),
-        ),
-      ),
-      menuItemStyleData: const MenuItemStyleData(height: 40),
-    ),
-  );
-}
-
-Widget dropDownButtonSearch(bool isLight, SearchQueryController queryCtl) {
+Widget dropDownButtonSearch(bool isLight, double width, SearchQueryController queryCtl) {
   return StatefulBuilder(
     builder: (BuildContext context, StateSetter setSearchState) {
       return DropdownButtonHideUnderline(
@@ -55,7 +25,7 @@ Widget dropDownButtonSearch(bool isLight, SearchQueryController queryCtl) {
           buttonStyleData: ButtonStyleData(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             height: 40,
-            width: 200,
+            width: width,
             decoration: BoxDecoration(
               color: isLight ? Colors.white : Colors.black,
               borderRadius: BorderRadius.circular(10),
@@ -110,8 +80,20 @@ Widget dropDownButtonSearch(bool isLight, SearchQueryController queryCtl) {
   );
 }
 
+Widget compactQuery(List<Widget> items) {
+  return Wrap(
+    spacing: 10,
+    runSpacing: 10,
+    alignment: WrapAlignment.start,
+    runAlignment: WrapAlignment.start,
+    children: items,
+  );
+}
+
 Widget titleContent(bool isLight, String title, Widget content) {
   return Column(
+    mainAxisAlignment: MainAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Row(
         children: [
@@ -131,6 +113,7 @@ Widget titleContent(bool isLight, String title, Widget content) {
           ),
         ],
       ),
+      SizedBox(height: 1.5.h),
       content,
     ],
   );
