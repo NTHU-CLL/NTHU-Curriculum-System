@@ -14,3 +14,11 @@ class SearchQueryController {
 
   SearchQueryController({required this.select, required this.search, required this.subjects});
 }
+
+class SearchQueryMultiController {
+  TextEditingController search;
+  List<String> selects;
+  List<String> subjects;
+
+  SearchQueryMultiController({required this.search, required this.selects, required this.subjects});
+}
