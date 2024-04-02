@@ -1,6 +1,6 @@
 import 'object.dart';
-import 'content.dart';
 import 'material.dart';
+import 'define/department.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -94,7 +94,31 @@ class _MyAppState extends State<MyApp> {
                 SizedBox(width: 2.w),
               ],
             ),
-            body: mainView(context, isMobile, isLight),
+            body: SingleChildScrollView(
+              child: Container(
+                margin: EdgeInsets.symmetric(vertical: 3.h, horizontal: isMobile ? 5.w : 20.w),
+                child: Column(
+                  children: [
+                    roundBorder(
+                      context,
+                      isLight,
+                      [
+                        titleContent(
+                          isLight,
+                          tr('query_department'),
+                          dropDownButtonSearch(isLight, queryDepartment),
+                        ),
+                        titleContent(
+                          isLight,
+                          tr('query_basic'),
+                          const Text("query_basic"),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
           );
         },
       ),

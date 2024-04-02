@@ -6,5 +6,7 @@
   "lang_zh": "Chinese",
   "query_basic": "Basic Query",
   "query_department": "Departmental Query",
-  "query_advanced": "Advanced Query"
+  "query_advanced": "Advanced Query",
+  "search_all": "All",
+  "search_hint": "Search"
 }
