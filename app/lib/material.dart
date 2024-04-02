@@ -13,9 +13,7 @@ Widget dropDownButton(Icon icon, List<ButtonItem> texts) {
           onTap: item.onPressed,
           child: Text(
             item.name,
-            style: const TextStyle(
-              fontSize: 14,
-            ),
+            style: TextStyle(fontSize: 11.sp),
           ),
         );
       }).toList(),

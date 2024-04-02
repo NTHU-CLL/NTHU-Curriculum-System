@@ -14,7 +14,7 @@ ThemeData getTheme(isLight) {
     appBarTheme: AppBarTheme(
       color: isLight ? Colors.cyanAccent : Colors.black,
       titleTextStyle: TextStyle(
-        fontSize: 14.sp,
+        fontSize: 13.sp,
         color: isLight ? Colors.black : Colors.white,
         fontWeight: FontWeight.bold,
       ),

@@ -1,8 +1,10 @@
 {
   "title": "NTHU Curriculum Search System",
+  "appbar_lang": "Language",
+  "appbar_theme": "Theme",
   "lang_en": "English",
   "lang_zh": "Chinese",
-  "basic_query": "Basic Query",
-  "department_query": "Departmental Query",
-  "advanced_query": "Advanced Query"
+  "query_basic": "Basic Query",
+  "query_department": "Departmental Query",
+  "query_advanced": "Advanced Query"
 }
