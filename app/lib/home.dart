@@ -71,6 +71,7 @@ class _MyHomePageState extends State<HomePage> {
             child: Column(
               children: [
                 roundBorder(
+                  context,
                   [
                     titleContent(
                       tr('department_query'),

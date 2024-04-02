@@ -50,7 +50,7 @@ Widget titleContent(String title, Widget content) {
   );
 }
 
-Widget roundBorder(List<Widget> content) {
+Widget roundBorder(BuildContext context, List<Widget> content) {
   return Container(
     padding: EdgeInsets.all(4.h),
     decoration: BoxDecoration(
