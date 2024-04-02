@@ -1,11 +1,9 @@
-import 'color.dart';
+import 'object.dart';
 import 'content.dart';
+import 'material.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:easy_localization/easy_localization.dart';
-
-import 'material.dart';
-import 'object.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,28 +34,34 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveSizer(
-      maxMobileWidth: 900,
-      builder: (context, orientation, screenType) {
-        bool isLight = mainThemeMode != ThemeMode.dark;
-        bool isMobile = Device.screenType == ScreenType.mobile;
-
-        return MaterialApp(
-          title: "NTHU Curriculum 課程系統",
-          theme: getTheme(true),
-          darkTheme: getTheme(false),
-          themeMode: mainThemeMode,
-          debugShowCheckedModeBanner: false,
-          localizationsDelegates: context.localizationDelegates,
-          supportedLocales: context.supportedLocales,
-          locale: context.locale,
-          home: Scaffold(
+    return MaterialApp(
+      title: "NTHU Curriculum 課程系統",
+      themeMode: mainThemeMode,
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
+      home: ResponsiveSizer(
+        maxMobileWidth: 900,
+        builder: (context, orientation, screenType) {
+          bool isLight = mainThemeMode != ThemeMode.dark;
+          bool isMobile = Device.screenType == ScreenType.mobile;
+          return Scaffold(
+            backgroundColor: isLight ? Colors.white : Colors.blueGrey[700],
             appBar: AppBar(
-              backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+              backgroundColor: isLight ? Colors.cyanAccent : Colors.black,
               title: const Text('title').tr(),
+              titleTextStyle: TextStyle(
+                fontSize: 13.sp,
+                fontWeight: FontWeight.bold,
+                color: isLight ? Colors.black : Colors.white,
+              ),
               actions: [
                 IconButton(
-                  icon: Icon(isLight ? Icons.dark_mode : Icons.light_mode),
+                  icon: Icon(
+                    isLight ? Icons.dark_mode : Icons.light_mode,
+                    color: isLight ? Colors.black : Colors.white,
+                  ),
                   onPressed: () {
                     setState(() {
                       mainThemeMode = isLight ? ThemeMode.dark : ThemeMode.light;
@@ -66,7 +70,12 @@ class _MyAppState extends State<MyApp> {
                 ),
                 SizedBox(width: 0.5.w),
                 dropDownButton(
-                  Icon(Icons.language, size: 14.sp),
+                  isLight,
+                  Icon(
+                    Icons.language,
+                    size: 14.sp,
+                    color: isLight ? Colors.black : Colors.white,
+                  ),
                   [
                     ButtonItem(
                       name: tr('lang_en'),
@@ -85,10 +94,10 @@ class _MyAppState extends State<MyApp> {
                 SizedBox(width: 2.w),
               ],
             ),
-            body: mainView(context, isMobile),
-          ),
-        );
-      },
+            body: mainView(context, isMobile, isLight),
+          );
+        },
+      ),
     );
   }
 }
