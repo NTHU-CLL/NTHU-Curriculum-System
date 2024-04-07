@@ -46,8 +46,9 @@ Widget dropDownButtonSearch(bool isLight, double width, SearchQueryController qu
             searchController: queryCtl.search,
             searchInnerWidgetHeight: 50,
             searchInnerWidget: Container(
-              height: 50,
+              height: 60,
               alignment: Alignment.centerLeft,
+              padding: const EdgeInsets.all(8),
               child: TextFormField(
                 expands: true,
                 maxLines: null,
