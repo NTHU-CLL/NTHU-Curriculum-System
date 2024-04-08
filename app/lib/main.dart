@@ -110,8 +110,8 @@ class _MyAppState extends State<MyApp> {
                           isLight,
                           tr('query_basic'),
                           compactQuery([
-                            dropDownButtonSearch(isLight, 8.w, querySemester),
-                            dropDownButtonSearch(isLight, 12.w, queryDepartment),
+                            dropDownButtonSearch(isLight, 160, querySemester),
+                            dropDownButtonSearch(isLight, 200, queryDepartment),
                           ]),
                         ),
                         SizedBox(height: 3.h),
