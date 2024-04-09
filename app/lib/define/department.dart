@@ -2,10 +2,10 @@ import '../object.dart';
 import 'package:flutter/material.dart';
 
 SearchQueryController queryDepartment = SearchQueryController(
-  select: "Department 開課單位",
+  select: "開課單位 Department",
   search: TextEditingController(),
   subjects: [
-    "Department 開課單位",
+    "開課單位 Department",
     "1",
     "1-1",
     "1-2",

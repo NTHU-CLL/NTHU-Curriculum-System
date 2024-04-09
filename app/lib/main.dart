@@ -1,5 +1,7 @@
+import 'package:app/define/week.dart';
+
 import 'object.dart';
-import 'define/dropdown.dart';
+import 'material/dropdown.dart';
 import 'define/semester.dart';
 import 'define/department.dart';
 import 'material/frame.dart';
@@ -112,13 +114,26 @@ class _MyAppState extends State<MyApp> {
                           compactQuery([
                             dropDownButtonSearch(isLight, 160, querySemester),
                             dropDownButtonSearch(isLight, 200, queryDepartment),
+                            dropDownButtonSearch(isLight, 170, queryWeek),
                           ]),
                         ),
                         SizedBox(height: 3.h),
                         titleContent(
                           isLight,
                           tr('query_mix'),
-                          const Text("query_basic"),
+                          compactQuery([
+                            dropDownButtonSearch(isLight, 160, querySemester),
+                            dropDownButtonSearch(isLight, 200, queryDepartment),
+                          ]),
+                        ),
+                        SizedBox(height: 3.h),
+                        titleContent(
+                          isLight,
+                          tr('query_advanced'),
+                          compactQuery([
+                            dropDownButtonSearch(isLight, 160, querySemester),
+                            dropDownButtonSearch(isLight, 200, queryDepartment),
+                          ]),
                         ),
                       ],
                     ),

@@ -2,18 +2,16 @@ import '../object.dart';
 import 'package:flutter/material.dart';
 
 SearchQueryController queryWeek = SearchQueryController(
-  select: "Department 開課單位",
+  select: "星期 Week",
   search: TextEditingController(),
   subjects: [
-    "Department 開課單位",
-    "1",
-    "1-1",
-    "1-2",
-    "2",
-    "3",
-    "3-1",
-    "3-2",
-    "4",
-    "5",
+    "星期 Week",
+    "星期一 Monday",
+    "星期二 Tuesday",
+    "星期三 Wednesday",
+    "星期四 Thursday",
+    "星期五 Friday",
+    "星期六 Saturday",
+    "星期日 Sunday",
   ],
 );
