@@ -11,10 +11,14 @@ Widget dropDownButtonSearch(bool isLight, double width, SearchQueryController qu
         child: DropdownButton2<String>(
           isExpanded: true,
           items: queryCtl.subjects
-              .map((item) => DropdownMenuItem(
-                    value: item,
+              .map(
+                (item) => DropdownMenuItem(
+                  value: item,
+                  child: Center(
                     child: Text(item, style: TextStyle(fontSize: 14, color: isLight ? Colors.black : Colors.white)),
-                  ))
+                  ),
+                ),
+              )
               .toList(),
           value: queryCtl.select,
           onChanged: (value) {
