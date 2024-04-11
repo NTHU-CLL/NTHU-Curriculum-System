@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func searchInStruct(obj interface{}, keyword string) bool {
+func SearchInStruct(obj interface{}, keyword string) bool {
 	val := reflect.ValueOf(obj)
 
 	if val.Kind() == reflect.Ptr {

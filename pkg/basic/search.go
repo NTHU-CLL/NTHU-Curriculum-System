@@ -1,9 +1,11 @@
 package basic
 
 import (
-	"fmt"
+	Object "NTHU-CCS/pkg/object"
 )
 
-func SearchCourse() {
-	fmt.Println("SearchCourse")
+func SearchCourse() []Object.Course {
+	Hits := []Object.Course{}
+
+	return Hits
 }

@@ -1,18 +1,19 @@
 package basic
 
 import (
-	"NTHU-CCS/pkg/object"
-	"fmt"
+	Object "NTHU-CCS/pkg/object"
 	"time"
 )
 
+var Courses []Object.Course
+
 type CCS struct {
-	RawDatas []object.Course
+	RawDatas []Object.Course
 }
 
-func AutoUpdate() {
+func AutoUpdate(url string) {
 	for {
-		fmt.Println("### AutoUpdate")
+		Courses = GetCourseData(url)
 		time.Sleep(5 * time.Second)
 	}
 }

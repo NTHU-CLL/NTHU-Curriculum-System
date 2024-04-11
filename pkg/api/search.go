@@ -2,6 +2,7 @@ package api
 
 import (
 	Basic "NTHU-CCS/pkg/basic"
+	"encoding/json"
 	"net/http"
 )
 
@@ -13,7 +14,15 @@ func RouterSearch() func(http.ResponseWriter, *http.Request) {
 
 		switch r.Method {
 		case "GET":
-			Basic.SearchCourse()
+			jsonResponse, err := json.Marshal(Basic.SearchCourse())
+			if err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}
+
+			w.Header().Set("Content-Type", "application/json; charset=utf-8")
+			w.WriteHeader(http.StatusOK)
+			w.Write(jsonResponse)
 
 		case "OPTIONS":
 			w.WriteHeader(http.StatusOK)
