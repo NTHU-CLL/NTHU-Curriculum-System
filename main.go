@@ -11,7 +11,7 @@ const (
 )
 
 func init() {
-	go Basic.AutoUpdate()
+	go Basic.AutoUpdate(UrlCourseData)
 }
 
 func main() {
