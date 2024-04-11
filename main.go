@@ -17,6 +17,7 @@ var Courses []Object.Course
 func init() {
 	//go Basic.AutoUpdate()
 	Courses = Basic.GetCourseData(UrlCourseData)
+
 	os.Exit(0)
 }
 
