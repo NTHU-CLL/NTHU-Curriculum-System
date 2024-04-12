@@ -4,6 +4,7 @@ import (
 	API "NTHU-CCS/pkg/api"
 	Basic "NTHU-CCS/pkg/basic"
 	"log"
+	"os"
 )
 
 const (
@@ -17,7 +18,10 @@ func init() {
 func main() {
 	log.Println("### NTHU Curriculum System")
 
-	var listenPort string = "5050"
+	if len(os.Args) < 2 {
+		log.Fatal("Error : Please provide the port number to listen on.")
+		return
+	}
 
-	API.CreateRouter(listenPort)
+	API.CreateRouter(os.Args[1])
 }
