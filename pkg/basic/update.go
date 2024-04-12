@@ -14,6 +14,6 @@ type CCS struct {
 func AutoUpdate(url string) {
 	for {
 		Courses = GetCourseData(url)
-		time.Sleep(5 * time.Second)
+		time.Sleep(24 * time.Hour)
 	}
 }
