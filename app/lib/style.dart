@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-double iconSize = 25;
+double topIconSize = 25;
+double bodyIconSize = 15;
 
 TextStyle topTitleStyle(bool isLight) {
   return TextStyle(
@@ -19,8 +20,15 @@ TextStyle topButtonStyle(bool isLight) {
 
 TextStyle bodyTitleStyle(bool isLight) {
   return TextStyle(
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: FontWeight.bold,
+    color: isLight ? Colors.black : Colors.white,
+  );
+}
+
+TextStyle bodyContentStyle(bool isLight) {
+  return TextStyle(
+    fontSize: 15,
     color: isLight ? Colors.black : Colors.white,
   );
 }

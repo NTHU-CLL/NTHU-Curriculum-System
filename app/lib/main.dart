@@ -64,7 +64,7 @@ class _MyAppState extends State<MyApp> {
                 IconButton(
                   icon: Icon(
                     isLight ? Icons.dark_mode : Icons.light_mode,
-                    size: iconSize,
+                    size: topIconSize,
                     color: isLight ? Colors.black : Colors.white,
                   ),
                   onPressed: () {
@@ -78,7 +78,7 @@ class _MyAppState extends State<MyApp> {
                   isLight,
                   Icon(
                     Icons.language,
-                    size: iconSize,
+                    size: topIconSize,
                     color: isLight ? Colors.black : Colors.white,
                   ),
                   [
@@ -112,8 +112,8 @@ class _MyAppState extends State<MyApp> {
                           isLight,
                           tr('query_basic'),
                           compactQuery([
-                            dropDownButtonSearch(isLight, 160, querySemester),
-                            dropDownButtonSearch(isLight, 200, queryDepartment),
+                            dropDownButtonSearch(isLight, 200, querySemester),
+                            dropDownButtonSearch(isLight, 250, queryDepartment),
                             dropDownButtonSearch(isLight, 180, queryWeek),
                           ]),
                         ),
@@ -122,8 +122,8 @@ class _MyAppState extends State<MyApp> {
                           isLight,
                           tr('query_mix'),
                           compactQuery([
-                            dropDownButtonSearch(isLight, 160, querySemester),
-                            dropDownButtonSearch(isLight, 200, queryDepartment),
+                            dropDownButtonSearch(isLight, 200, querySemester),
+                            dropDownButtonSearch(isLight, 250, queryDepartment),
                           ]),
                         ),
                         SizedBox(height: 3.h),
@@ -131,8 +131,8 @@ class _MyAppState extends State<MyApp> {
                           isLight,
                           tr('query_advanced'),
                           compactQuery([
-                            dropDownButtonSearch(isLight, 160, querySemester),
-                            dropDownButtonSearch(isLight, 200, queryDepartment),
+                            dropDownButtonSearch(isLight, 200, querySemester),
+                            dropDownButtonSearch(isLight, 250, queryDepartment),
                           ]),
                         ),
                       ],

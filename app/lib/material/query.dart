@@ -1,3 +1,4 @@
+import '../style.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -18,20 +19,9 @@ Widget titleContent(bool isLight, String title, Widget content) {
     children: [
       Row(
         children: [
-          Icon(
-            Icons.circle,
-            size: 10.sp,
-            color: isLight ? Colors.black : Colors.white,
-          ),
-          SizedBox(width: 1.w),
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.bold,
-              color: isLight ? Colors.black : Colors.white,
-            ),
-          ),
+          Icon(Icons.circle, size: bodyIconSize, color: isLight ? Colors.black : Colors.white),
+          SizedBox(width: bodyIconSize),
+          Text(title, style: bodyTitleStyle(isLight)),
         ],
       ),
       SizedBox(height: 1.5.h),
