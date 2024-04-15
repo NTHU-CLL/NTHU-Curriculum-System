@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:easy_localization/easy_localization.dart';
 
+import 'style.dart';
+
 List<Course> courses = [];
 
 Future<void> main() async {
@@ -57,15 +59,12 @@ class _MyAppState extends State<MyApp> {
             appBar: AppBar(
               backgroundColor: isLight ? Colors.cyanAccent : Colors.black,
               title: const Text('title').tr(),
-              titleTextStyle: TextStyle(
-                fontSize: 13.sp,
-                fontWeight: FontWeight.bold,
-                color: isLight ? Colors.black : Colors.white,
-              ),
+              titleTextStyle: topTitleStyle(isLight),
               actions: [
                 IconButton(
                   icon: Icon(
                     isLight ? Icons.dark_mode : Icons.light_mode,
+                    size: iconSize,
                     color: isLight ? Colors.black : Colors.white,
                   ),
                   onPressed: () {
@@ -79,7 +78,7 @@ class _MyAppState extends State<MyApp> {
                   isLight,
                   Icon(
                     Icons.language,
-                    size: 14.sp,
+                    size: iconSize,
                     color: isLight ? Colors.black : Colors.white,
                   ),
                   [
