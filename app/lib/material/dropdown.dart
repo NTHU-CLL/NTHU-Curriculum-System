@@ -26,8 +26,7 @@ Widget dropDownButtonSearch(bool isLight, double width, SearchQueryController qu
             });
           },
           buttonStyleData: ButtonStyleData(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            height: 40,
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             width: width,
             decoration: BoxDecoration(
               color: isLight ? Colors.white : Colors.black,
@@ -36,18 +35,17 @@ Widget dropDownButtonSearch(bool isLight, double width, SearchQueryController qu
             ),
           ),
           dropdownStyleData: DropdownStyleData(
-            maxHeight: 400,
-            padding: const EdgeInsets.all(5),
+            maxHeight: 500,
+            padding: EdgeInsets.zero,
             decoration: BoxDecoration(
               color: isLight ? Colors.white : Colors.black,
               borderRadius: BorderRadius.circular(10),
               border: Border.all(color: isLight ? Colors.black : Colors.white),
             ),
           ),
-          menuItemStyleData: const MenuItemStyleData(height: 40),
           dropdownSearchData: DropdownSearchData(
             searchController: queryCtl.search,
-            searchInnerWidgetHeight: 50,
+            searchInnerWidgetHeight: 40,
             searchInnerWidget: Container(
               height: 60,
               alignment: Alignment.centerLeft,

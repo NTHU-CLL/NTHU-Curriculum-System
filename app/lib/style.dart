@@ -5,7 +5,7 @@ double bodyIconSize = 15;
 
 TextStyle topTitleStyle(bool isLight) {
   return TextStyle(
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: FontWeight.bold,
     color: isLight ? Colors.black : Colors.white,
   );
@@ -13,7 +13,7 @@ TextStyle topTitleStyle(bool isLight) {
 
 TextStyle topButtonStyle(bool isLight) {
   return TextStyle(
-    fontSize: 18,
+    fontSize: 16,
     color: isLight ? Colors.black : Colors.white,
   );
 }
@@ -28,7 +28,7 @@ TextStyle bodyTitleStyle(bool isLight) {
 
 TextStyle bodyContentStyle(bool isLight) {
   return TextStyle(
-    fontSize: 15,
+    fontSize: 16,
     color: isLight ? Colors.black : Colors.white,
   );
 }

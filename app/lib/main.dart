@@ -102,42 +102,46 @@ class _MyAppState extends State<MyApp> {
             body: SingleChildScrollView(
               child: Container(
                 margin: EdgeInsets.symmetric(vertical: 3.h, horizontal: isMobile ? 5.w : 20.w),
-                child: Column(
-                  children: [
-                    roundBorder(
-                      context,
-                      isLight,
-                      [
-                        titleContent(
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    return Column(
+                      children: [
+                        roundBorder(
+                          context,
                           isLight,
-                          tr('query_basic'),
-                          compactQuery([
-                            dropDownButtonSearch(isLight, 200, querySemester),
-                            dropDownButtonSearch(isLight, 250, queryDepartment),
-                            dropDownButtonSearch(isLight, 180, queryWeek),
-                          ]),
-                        ),
-                        SizedBox(height: 3.h),
-                        titleContent(
-                          isLight,
-                          tr('query_mix'),
-                          compactQuery([
-                            dropDownButtonSearch(isLight, 200, querySemester),
-                            dropDownButtonSearch(isLight, 250, queryDepartment),
-                          ]),
-                        ),
-                        SizedBox(height: 3.h),
-                        titleContent(
-                          isLight,
-                          tr('query_advanced'),
-                          compactQuery([
-                            dropDownButtonSearch(isLight, 200, querySemester),
-                            dropDownButtonSearch(isLight, 250, queryDepartment),
-                          ]),
+                          [
+                            titleContent(
+                              isLight,
+                              tr('query_basic'),
+                              compactQuery([
+                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 300, querySemester),
+                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 300, queryDepartment),
+                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 300, queryWeek),
+                              ]),
+                            ),
+                            SizedBox(height: 3.h),
+                            titleContent(
+                              isLight,
+                              tr('query_mix'),
+                              compactQuery([
+                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 300, querySemester),
+                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 300, queryDepartment),
+                              ]),
+                            ),
+                            SizedBox(height: 3.h),
+                            titleContent(
+                              isLight,
+                              tr('query_advanced'),
+                              compactQuery([
+                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 300, querySemester),
+                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 300, queryDepartment),
+                              ]),
+                            ),
+                          ],
                         ),
                       ],
-                    ),
-                  ],
+                    );
+                  },
                 ),
               ),
             ),
