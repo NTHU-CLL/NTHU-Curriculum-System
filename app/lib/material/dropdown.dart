@@ -1,3 +1,4 @@
+import '../style.dart';
 import '../object.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -14,9 +15,7 @@ Widget dropDownButtonSearch(bool isLight, double width, SearchQueryController qu
               .map(
                 (item) => DropdownMenuItem(
                   value: item,
-                  child: Center(
-                    child: Text(item, style: TextStyle(fontSize: 14, color: isLight ? Colors.black : Colors.white)),
-                  ),
+                  child: Text(item, style: bodyContentStyle(isLight)),
                 ),
               )
               .toList(),
@@ -27,8 +26,7 @@ Widget dropDownButtonSearch(bool isLight, double width, SearchQueryController qu
             });
           },
           buttonStyleData: ButtonStyleData(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            height: 40,
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             width: width,
             decoration: BoxDecoration(
               color: isLight ? Colors.white : Colors.black,
@@ -37,18 +35,17 @@ Widget dropDownButtonSearch(bool isLight, double width, SearchQueryController qu
             ),
           ),
           dropdownStyleData: DropdownStyleData(
-            maxHeight: 400,
-            padding: const EdgeInsets.all(5),
+            maxHeight: 500,
+            padding: EdgeInsets.zero,
             decoration: BoxDecoration(
               color: isLight ? Colors.white : Colors.black,
               borderRadius: BorderRadius.circular(10),
               border: Border.all(color: isLight ? Colors.black : Colors.white),
             ),
           ),
-          menuItemStyleData: const MenuItemStyleData(height: 40),
           dropdownSearchData: DropdownSearchData(
             searchController: queryCtl.search,
-            searchInnerWidgetHeight: 50,
+            searchInnerWidgetHeight: 40,
             searchInnerWidget: Container(
               height: 60,
               alignment: Alignment.centerLeft,
@@ -57,12 +54,12 @@ Widget dropDownButtonSearch(bool isLight, double width, SearchQueryController qu
                 expands: true,
                 maxLines: null,
                 controller: queryCtl.search,
-                style: TextStyle(fontSize: 10.sp, color: isLight ? Colors.black : Colors.white),
+                style: bodyContentStyle(isLight),
                 decoration: InputDecoration(
                   isDense: true,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                   hintText: "search_hint".tr(),
-                  hintStyle: TextStyle(fontSize: 10.sp, color: isLight ? Colors.black : Colors.white),
+                  hintStyle: bodyContentStyle(isLight),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(color: isLight ? Colors.black : Colors.white),

@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:easy_localization/easy_localization.dart';
 
+import 'style.dart';
+
 List<Course> courses = [];
 
 Future<void> main() async {
@@ -57,15 +59,12 @@ class _MyAppState extends State<MyApp> {
             appBar: AppBar(
               backgroundColor: isLight ? Colors.cyanAccent : Colors.black,
               title: const Text('title').tr(),
-              titleTextStyle: TextStyle(
-                fontSize: 13.sp,
-                fontWeight: FontWeight.bold,
-                color: isLight ? Colors.black : Colors.white,
-              ),
+              titleTextStyle: topTitleStyle(isLight),
               actions: [
                 IconButton(
                   icon: Icon(
                     isLight ? Icons.dark_mode : Icons.light_mode,
+                    size: topIconSize,
                     color: isLight ? Colors.black : Colors.white,
                   ),
                   onPressed: () {
@@ -79,7 +78,7 @@ class _MyAppState extends State<MyApp> {
                   isLight,
                   Icon(
                     Icons.language,
-                    size: 14.sp,
+                    size: topIconSize,
                     color: isLight ? Colors.black : Colors.white,
                   ),
                   [
@@ -103,42 +102,46 @@ class _MyAppState extends State<MyApp> {
             body: SingleChildScrollView(
               child: Container(
                 margin: EdgeInsets.symmetric(vertical: 3.h, horizontal: isMobile ? 5.w : 20.w),
-                child: Column(
-                  children: [
-                    roundBorder(
-                      context,
-                      isLight,
-                      [
-                        titleContent(
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    return Column(
+                      children: [
+                        roundBorder(
+                          context,
                           isLight,
-                          tr('query_basic'),
-                          compactQuery([
-                            dropDownButtonSearch(isLight, 160, querySemester),
-                            dropDownButtonSearch(isLight, 200, queryDepartment),
-                            dropDownButtonSearch(isLight, 180, queryWeek),
-                          ]),
-                        ),
-                        SizedBox(height: 3.h),
-                        titleContent(
-                          isLight,
-                          tr('query_mix'),
-                          compactQuery([
-                            dropDownButtonSearch(isLight, 160, querySemester),
-                            dropDownButtonSearch(isLight, 200, queryDepartment),
-                          ]),
-                        ),
-                        SizedBox(height: 3.h),
-                        titleContent(
-                          isLight,
-                          tr('query_advanced'),
-                          compactQuery([
-                            dropDownButtonSearch(isLight, 160, querySemester),
-                            dropDownButtonSearch(isLight, 200, queryDepartment),
-                          ]),
+                          [
+                            titleContent(
+                              isLight,
+                              tr('query_basic'),
+                              compactQuery([
+                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 300, querySemester),
+                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 300, queryDepartment),
+                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 300, queryWeek),
+                              ]),
+                            ),
+                            SizedBox(height: 3.h),
+                            titleContent(
+                              isLight,
+                              tr('query_mix'),
+                              compactQuery([
+                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 300, querySemester),
+                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 300, queryDepartment),
+                              ]),
+                            ),
+                            SizedBox(height: 3.h),
+                            titleContent(
+                              isLight,
+                              tr('query_advanced'),
+                              compactQuery([
+                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 300, querySemester),
+                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 300, queryDepartment),
+                              ]),
+                            ),
+                          ],
                         ),
                       ],
-                    ),
-                  ],
+                    );
+                  },
                 ),
               ),
             ),
