@@ -5,10 +5,10 @@ import 'define/time.dart';
 import 'define/college.dart';
 import 'define/semester.dart';
 import 'define/department.dart';
-import 'material/frame.dart';
 import 'material/query.dart';
 import 'material/keyword.dart';
-import 'material/dropdown.dart';
+import 'material/dropdown/appbar.dart';
+import 'material/dropdown/search.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -40,6 +40,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  bool showAdvance = true;
   ThemeMode mainThemeMode = ThemeMode.system;
   TextEditingController basicKeyword = TextEditingController();
   TextEditingController advanceTeacher = TextEditingController();
@@ -172,16 +173,33 @@ class _MyAppState extends State<MyApp> {
                                 ),
                               ]),
                             ),
-                            SizedBox(height: 3.h),
-                            titleContent(
-                              isLight,
-                              tr('query_advanced'),
-                              compactQuery([
-                                keyword(isLight, advanceTeacher, isMobile ? constraints.maxWidth : 250, "advance_teacher".tr()),
-                                keyword(isLight, advanceCode, isMobile ? constraints.maxWidth : 250, "advance_code".tr()),
-                                keyword(isLight, advanceGeneral, isMobile ? constraints.maxWidth : 250, "advance_general".tr()),
-                              ]),
+                            SizedBox(height: 1.h),
+                            Container(
+                              alignment: Alignment.centerRight,
+                              child: IconButton(
+                                icon: Icon(
+                                  showAdvance ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+                                  size: 40,
+                                  color: isLight ? Colors.grey : Colors.white,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    showAdvance = !showAdvance;
+                                  });
+                                },
+                              ),
                             ),
+                            SizedBox(height: 1.h),
+                            if (showAdvance)
+                              titleContent(
+                                isLight,
+                                tr('query_advanced'),
+                                compactQuery([
+                                  keyword(isLight, advanceTeacher, isMobile ? constraints.maxWidth : 250, "advance_teacher".tr()),
+                                  keyword(isLight, advanceCode, isMobile ? constraints.maxWidth : 250, "advance_code".tr()),
+                                  keyword(isLight, advanceGeneral, isMobile ? constraints.maxWidth : 250, "advance_general".tr()),
+                                ]),
+                              ),
                           ],
                         ),
                       ],
