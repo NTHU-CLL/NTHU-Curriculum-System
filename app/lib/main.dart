@@ -1,6 +1,5 @@
-import 'package:flutter/widgets.dart';
+import 'package:app/material/rwd.dart';
 
-import 'define/expertise.dart';
 import 'style.dart';
 import 'object.dart';
 import 'define/week.dart';
@@ -11,6 +10,7 @@ import 'define/group.dart';
 import 'define/college.dart';
 import 'define/program.dart';
 import 'define/semester.dart';
+import 'define/expertise.dart';
 import 'define/department.dart';
 import 'material/query.dart';
 import 'material/keyword.dart';
@@ -135,8 +135,10 @@ class _MyAppState extends State<MyApp> {
                 child: LayoutBuilder(
                   builder: (context, constraints) {
                     double maxSize = constraints.maxWidth - 200;
+                    double maxPopSize = constraints.maxWidth - 80;
                     return Column(
                       children: [
+                        // ### Basic Query
                         roundBorder(
                           context,
                           isLight,
@@ -379,6 +381,8 @@ class _MyAppState extends State<MyApp> {
                           ],
                         ),
                         SizedBox(height: 3.h),
+
+                        // ### Regulation
                         roundBorder(
                           context,
                           isLight,
@@ -386,27 +390,28 @@ class _MyAppState extends State<MyApp> {
                             titleContent(
                               isLight,
                               tr('query_regulation'),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  compactQuery([
-                                    dropDownButtonSearch(
-                                      isLight,
-                                      isMobile ? maxSize : 250,
-                                      isMobile ? constraints.maxWidth : 250,
-                                      regulationDepartment,
-                                    ),
-                                  ]),
-                                  Container(
-                                    alignment: Alignment.centerRight,
-                                    child: searchButton(isLight, () {}),
+                              rwd(
+                                isMobile,
+                                maxSize,
+                                compactQuery([
+                                  dropDownButtonSearch(
+                                    isLight,
+                                    isMobile ? constraints.maxWidth : 250,
+                                    isMobile ? maxPopSize : 250,
+                                    regulationDepartment,
                                   ),
-                                ],
+                                ]),
+                                Container(
+                                  alignment: Alignment.centerRight,
+                                  child: searchButton(isLight, () {}),
+                                ),
                               ),
                             ),
                           ],
                         ),
                         SizedBox(height: 3.h),
+
+                        // ### Program
                         roundBorder(
                           context,
                           isLight,
@@ -414,36 +419,34 @@ class _MyAppState extends State<MyApp> {
                             titleContent(
                               isLight,
                               tr('query_program'),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  SizedBox(
-                                    width: maxSize,
-                                    child: compactQuery([
-                                      dropDownButtonSearch(
-                                        isLight,
-                                        isMobile ? maxSize : 170,
-                                        isMobile ? constraints.maxWidth : 170,
-                                        programSemester,
-                                      ),
-                                      dropDownButtonSearch(
-                                        isLight,
-                                        isMobile ? maxSize : 250,
-                                        isMobile ? constraints.maxWidth : 250,
-                                        creditProgram,
-                                      ),
-                                    ]),
+                              rwd(
+                                isMobile,
+                                maxSize,
+                                compactQuery([
+                                  dropDownButtonSearch(
+                                    isLight,
+                                    isMobile ? constraints.maxWidth : 170,
+                                    isMobile ? maxPopSize : 170,
+                                    programSemester,
                                   ),
-                                  Container(
-                                    alignment: Alignment.centerRight,
-                                    child: searchButton(isLight, () {}),
+                                  dropDownButtonSearch(
+                                    isLight,
+                                    isMobile ? constraints.maxWidth : 250,
+                                    isMobile ? maxPopSize : 250,
+                                    creditProgram,
                                   ),
-                                ],
+                                ]),
+                                Container(
+                                  alignment: Alignment.centerRight,
+                                  child: searchButton(isLight, () {}),
+                                ),
                               ),
                             ),
                           ],
                         ),
                         SizedBox(height: 3.h),
+
+                        // ### College
                         roundBorder(
                           context,
                           isLight,
@@ -451,57 +454,53 @@ class _MyAppState extends State<MyApp> {
                             titleContent(
                               isLight,
                               tr('query_college'),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  SizedBox(
-                                    width: maxSize,
-                                    child: compactQuery([
-                                      dropDownButtonSearch(
-                                        isLight,
-                                        isMobile ? constraints.maxWidth : 170,
-                                        isMobile ? constraints.maxWidth : 170,
-                                        expertiseSemester,
-                                      ),
-                                      dropDownButtonSearch(
-                                        isLight,
-                                        isMobile ? constraints.maxWidth : 230,
-                                        isMobile ? constraints.maxWidth : 230,
-                                        expertise1,
-                                      ),
-                                      dropDownButtonSearch(
-                                        isLight,
-                                        isMobile ? constraints.maxWidth : 230,
-                                        isMobile ? constraints.maxWidth : 230,
-                                        expertise2,
-                                      ),
-                                      hashTag(
-                                        isLight,
-                                        expertiseColumnar,
-                                        "college_columnar".tr(),
-                                        () {
-                                          setState(() {
-                                            expertiseColumnar = !expertiseColumnar;
-                                          });
-                                        },
-                                      ),
-                                      hashTag(
-                                        isLight,
-                                        expertiseTable,
-                                        "college_timetable".tr(),
-                                        () {
-                                          setState(() {
-                                            expertiseTable = !expertiseTable;
-                                          });
-                                        },
-                                      ),
-                                    ]),
+                              rwd(
+                                isMobile,
+                                maxSize,
+                                compactQuery([
+                                  dropDownButtonSearch(
+                                    isLight,
+                                    isMobile ? constraints.maxWidth : 170,
+                                    isMobile ? maxPopSize : 170,
+                                    expertiseSemester,
                                   ),
-                                  Container(
-                                    alignment: Alignment.centerRight,
-                                    child: searchButton(isLight, () {}),
+                                  dropDownButtonSearch(
+                                    isLight,
+                                    isMobile ? constraints.maxWidth : 230,
+                                    isMobile ? maxPopSize : 230,
+                                    expertise1,
                                   ),
-                                ],
+                                  dropDownButtonSearch(
+                                    isLight,
+                                    isMobile ? constraints.maxWidth : 230,
+                                    isMobile ? maxPopSize : 230,
+                                    expertise2,
+                                  ),
+                                  hashTag(
+                                    isLight,
+                                    expertiseColumnar,
+                                    "college_columnar".tr(),
+                                    () {
+                                      setState(() {
+                                        expertiseColumnar = !expertiseColumnar;
+                                      });
+                                    },
+                                  ),
+                                  hashTag(
+                                    isLight,
+                                    expertiseTable,
+                                    "college_timetable".tr(),
+                                    () {
+                                      setState(() {
+                                        expertiseTable = !expertiseTable;
+                                      });
+                                    },
+                                  ),
+                                ]),
+                                Container(
+                                  alignment: Alignment.centerRight,
+                                  child: searchButton(isLight, () {}),
+                                ),
                               ),
                             ),
                           ],
