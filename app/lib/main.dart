@@ -1,14 +1,21 @@
+import 'define/expertise.dart';
 import 'style.dart';
 import 'object.dart';
 import 'define/week.dart';
 import 'define/time.dart';
+import 'define/class.dart';
+import 'define/grade.dart';
+import 'define/group.dart';
 import 'define/college.dart';
+import 'define/program.dart';
 import 'define/semester.dart';
 import 'define/department.dart';
-import 'material/frame.dart';
 import 'material/query.dart';
 import 'material/keyword.dart';
-import 'material/dropdown.dart';
+import 'material/button/hashtag.dart';
+import 'material/button/search.dart';
+import 'material/dropdown/appbar.dart';
+import 'material/dropdown/search.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -40,6 +47,21 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  bool showAdvance = true;
+  bool advanceEnglish = false;
+  bool advanceChinese = false;
+  bool advanceSub1 = false;
+  bool advanceSub2 = false;
+  bool advanceSub3 = false;
+  bool advanceSub4 = false;
+  bool advanceSub5 = false;
+  bool advanceSub6 = false;
+  bool advanceSub7 = false;
+  bool advanceSub8 = false;
+  bool advanceSub9 = false;
+  bool advanceSub10 = false;
+  bool expertiseColumnar = false;
+  bool expertiseTable = false;
   ThemeMode mainThemeMode = ThemeMode.system;
   TextEditingController basicKeyword = TextEditingController();
   TextEditingController advanceTeacher = TextEditingController();
@@ -122,8 +144,8 @@ class _MyAppState extends State<MyApp> {
                               compactQuery([
                                 dropDownButtonSearch(
                                   isLight,
-                                  isMobile ? constraints.maxWidth : 200,
-                                  isMobile ? constraints.maxWidth : 200,
+                                  isMobile ? constraints.maxWidth : 170,
+                                  isMobile ? constraints.maxWidth : 170,
                                   basicSemester,
                                 ),
                                 dropDownButtonSearch(
@@ -140,7 +162,7 @@ class _MyAppState extends State<MyApp> {
                                 ),
                                 dropDownButtonSearch(
                                   isLight,
-                                  isMobile ? constraints.maxWidth : 150,
+                                  isMobile ? constraints.maxWidth : 200,
                                   isMobile ? constraints.maxWidth : 150,
                                   basicStartTime,
                                 ),
@@ -154,33 +176,330 @@ class _MyAppState extends State<MyApp> {
                               compactQuery([
                                 dropDownButtonSearch(
                                   isLight,
-                                  isMobile ? constraints.maxWidth : 200,
-                                  isMobile ? constraints.maxWidth : 200,
+                                  isMobile ? constraints.maxWidth : 170,
+                                  isMobile ? constraints.maxWidth : 170,
                                   mixSemester,
                                 ),
                                 dropDownButtonSearch(
                                   isLight,
-                                  isMobile ? constraints.maxWidth : 200,
-                                  isMobile ? constraints.maxWidth : 200,
+                                  isMobile ? constraints.maxWidth : 180,
+                                  isMobile ? constraints.maxWidth : 180,
                                   mixCollege,
                                 ),
                                 dropDownButtonSearch(
                                   isLight,
-                                  isMobile ? constraints.maxWidth : 200,
-                                  isMobile ? constraints.maxWidth : 200,
+                                  isMobile ? constraints.maxWidth : 180,
+                                  isMobile ? constraints.maxWidth : 180,
                                   mixDepartment,
+                                ),
+                                dropDownButtonSearch(
+                                  isLight,
+                                  isMobile ? constraints.maxWidth : 150,
+                                  isMobile ? constraints.maxWidth : 180,
+                                  mixGrade,
+                                ),
+                                dropDownButtonSearch(
+                                  isLight,
+                                  isMobile ? constraints.maxWidth : 150,
+                                  isMobile ? constraints.maxWidth : 180,
+                                  mixClass,
+                                ),
+                                dropDownButtonSearch(
+                                  isLight,
+                                  isMobile ? constraints.maxWidth : 150,
+                                  isMobile ? constraints.maxWidth : 180,
+                                  mixGroup,
                                 ),
                               ]),
                             ),
-                            SizedBox(height: 3.h),
+                            Container(
+                              alignment: Alignment.centerRight,
+                              child: IconButton(
+                                icon: Icon(
+                                  showAdvance ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+                                  size: 38,
+                                  color: isLight ? Colors.grey : Colors.white,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    showAdvance = !showAdvance;
+                                  });
+                                },
+                              ),
+                            ),
+                            if (showAdvance)
+                              titleContent(
+                                isLight,
+                                tr('query_advanced'),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    compactQuery([
+                                      keyword(isLight, advanceTeacher, isMobile ? constraints.maxWidth : 250, "advance_teacher".tr()),
+                                      keyword(isLight, advanceCode, isMobile ? constraints.maxWidth : 250, "advance_code".tr()),
+                                      keyword(isLight, advanceGeneral, isMobile ? constraints.maxWidth : 250, "advance_general".tr()),
+                                    ]),
+                                    const SizedBox(height: 15),
+                                    compactQuery([
+                                      hashTag(
+                                        isLight,
+                                        advanceEnglish,
+                                        "advance_lang_en".tr(),
+                                        () {
+                                          setState(() {
+                                            advanceEnglish = !advanceEnglish;
+                                          });
+                                        },
+                                      ),
+                                      hashTag(
+                                        isLight,
+                                        advanceChinese,
+                                        "advance_lang_zh".tr(),
+                                        () {
+                                          setState(() {
+                                            advanceChinese = !advanceChinese;
+                                          });
+                                        },
+                                      ),
+                                    ]),
+                                    const SizedBox(height: 15),
+                                    compactQuery([
+                                      hashTag(
+                                        isLight,
+                                        advanceSub1,
+                                        "advance_sub_1".tr(),
+                                        () {
+                                          setState(() {
+                                            advanceSub1 = !advanceSub1;
+                                          });
+                                        },
+                                      ),
+                                      hashTag(
+                                        isLight,
+                                        advanceSub2,
+                                        "advance_sub_2".tr(),
+                                        () {
+                                          setState(() {
+                                            advanceSub2 = !advanceSub2;
+                                          });
+                                        },
+                                      ),
+                                      hashTag(
+                                        isLight,
+                                        advanceSub3,
+                                        "advance_sub_3".tr(),
+                                        () {
+                                          setState(() {
+                                            advanceSub3 = !advanceSub3;
+                                          });
+                                        },
+                                      ),
+                                      hashTag(
+                                        isLight,
+                                        advanceSub4,
+                                        "advance_sub_4".tr(),
+                                        () {
+                                          setState(() {
+                                            advanceSub4 = !advanceSub4;
+                                          });
+                                        },
+                                      ),
+                                      hashTag(
+                                        isLight,
+                                        advanceSub5,
+                                        "advance_sub_5".tr(),
+                                        () {
+                                          setState(() {
+                                            advanceSub5 = !advanceSub5;
+                                          });
+                                        },
+                                      ),
+                                      hashTag(
+                                        isLight,
+                                        advanceSub6,
+                                        "advance_sub_6".tr(),
+                                        () {
+                                          setState(() {
+                                            advanceSub6 = !advanceSub6;
+                                          });
+                                        },
+                                      ),
+                                      hashTag(
+                                        isLight,
+                                        advanceSub7,
+                                        "advance_sub_7".tr(),
+                                        () {
+                                          setState(() {
+                                            advanceSub7 = !advanceSub7;
+                                          });
+                                        },
+                                      ),
+                                      hashTag(
+                                        isLight,
+                                        advanceSub8,
+                                        "advance_sub_8".tr(),
+                                        () {
+                                          setState(() {
+                                            advanceSub8 = !advanceSub8;
+                                          });
+                                        },
+                                      ),
+                                      hashTag(
+                                        isLight,
+                                        advanceSub9,
+                                        "advance_sub_9".tr(),
+                                        () {
+                                          setState(() {
+                                            advanceSub9 = !advanceSub9;
+                                          });
+                                        },
+                                      ),
+                                      hashTag(
+                                        isLight,
+                                        advanceSub10,
+                                        "advance_sub_10".tr(),
+                                        () {
+                                          setState(() {
+                                            advanceSub10 = !advanceSub10;
+                                          });
+                                        },
+                                      ),
+                                    ]),
+                                  ],
+                                ),
+                              ),
+                            const SizedBox(height: 10),
+                            Container(
+                              alignment: Alignment.centerRight,
+                              child: searchButton(isLight, () {}),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 3.h),
+                        roundBorder(
+                          context,
+                          isLight,
+                          [
                             titleContent(
                               isLight,
-                              tr('query_advanced'),
-                              compactQuery([
-                                keyword(isLight, advanceTeacher, isMobile ? constraints.maxWidth : 250, "advance_teacher".tr()),
-                                keyword(isLight, advanceCode, isMobile ? constraints.maxWidth : 250, "advance_code".tr()),
-                                keyword(isLight, advanceGeneral, isMobile ? constraints.maxWidth : 250, "advance_general".tr()),
-                              ]),
+                              tr('query_regulation'),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  compactQuery([
+                                    dropDownButtonSearch(
+                                      isLight,
+                                      isMobile ? constraints.maxWidth : 250,
+                                      isMobile ? constraints.maxWidth : 250,
+                                      regulationDepartment,
+                                    ),
+                                  ]),
+                                  Container(
+                                    alignment: Alignment.centerRight,
+                                    child: searchButton(isLight, () {}),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 3.h),
+                        roundBorder(
+                          context,
+                          isLight,
+                          [
+                            titleContent(
+                              isLight,
+                              tr('query_program'),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  compactQuery([
+                                    dropDownButtonSearch(
+                                      isLight,
+                                      isMobile ? constraints.maxWidth : 170,
+                                      isMobile ? constraints.maxWidth : 170,
+                                      programSemester,
+                                    ),
+                                    dropDownButtonSearch(
+                                      isLight,
+                                      isMobile ? constraints.maxWidth : 250,
+                                      isMobile ? constraints.maxWidth : 250,
+                                      creditProgram,
+                                    ),
+                                  ]),
+                                  Container(
+                                    alignment: Alignment.centerRight,
+                                    child: searchButton(isLight, () {}),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 3.h),
+                        roundBorder(
+                          context,
+                          isLight,
+                          [
+                            titleContent(
+                              isLight,
+                              tr('query_college'),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    flex: 17,
+                                    child: compactQuery([
+                                      dropDownButtonSearch(
+                                        isLight,
+                                        isMobile ? constraints.maxWidth : 170,
+                                        isMobile ? constraints.maxWidth : 170,
+                                        expertiseSemester,
+                                      ),
+                                      dropDownButtonSearch(
+                                        isLight,
+                                        isMobile ? constraints.maxWidth : 230,
+                                        isMobile ? constraints.maxWidth : 230,
+                                        expertise1,
+                                      ),
+                                      dropDownButtonSearch(
+                                        isLight,
+                                        isMobile ? constraints.maxWidth : 230,
+                                        isMobile ? constraints.maxWidth : 230,
+                                        expertise2,
+                                      ),
+                                      hashTag(
+                                        isLight,
+                                        expertiseColumnar,
+                                        "college_columnar".tr(),
+                                        () {
+                                          setState(() {
+                                            expertiseColumnar = !expertiseColumnar;
+                                          });
+                                        },
+                                      ),
+                                      hashTag(
+                                        isLight,
+                                        expertiseTable,
+                                        "college_timetable".tr(),
+                                        () {
+                                          setState(() {
+                                            expertiseTable = !expertiseTable;
+                                          });
+                                        },
+                                      ),
+                                    ]),
+                                  ),
+                                  Expanded(
+                                    flex: 3,
+                                    child: Container(
+                                      alignment: Alignment.centerRight,
+                                      child: searchButton(isLight, () {}),
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ],
                         ),
