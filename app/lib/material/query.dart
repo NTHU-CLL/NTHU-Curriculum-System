@@ -35,7 +35,7 @@ Widget roundBorder(BuildContext context, bool isLight, List<Widget> content) {
     padding: EdgeInsets.all(4.h),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(30),
-      border: Border.all(width: 4, color: isLight ? Colors.black : Colors.white),
+      border: Border.all(width: 2, color: isLight ? Colors.black : Colors.white),
     ),
     child: Column(children: content),
   );

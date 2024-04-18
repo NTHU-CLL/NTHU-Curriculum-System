@@ -1,5 +1,3 @@
-import 'material/button/hashtag.dart';
-import 'material/button/search.dart';
 import 'style.dart';
 import 'object.dart';
 import 'define/week.dart';
@@ -8,10 +6,13 @@ import 'define/class.dart';
 import 'define/grade.dart';
 import 'define/group.dart';
 import 'define/college.dart';
+import 'define/program.dart';
 import 'define/semester.dart';
 import 'define/department.dart';
 import 'material/query.dart';
 import 'material/keyword.dart';
+import 'material/button/hashtag.dart';
+import 'material/button/search.dart';
 import 'material/dropdown/appbar.dart';
 import 'material/dropdown/search.dart';
 import 'package:flutter/material.dart';
@@ -368,6 +369,102 @@ class _MyAppState extends State<MyApp> {
                             Container(
                               alignment: Alignment.centerRight,
                               child: searchButton(isLight, () {}),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 3.h),
+                        roundBorder(
+                          context,
+                          isLight,
+                          [
+                            titleContent(
+                              isLight,
+                              tr('query_regulation'),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  compactQuery([
+                                    dropDownButtonSearch(
+                                      isLight,
+                                      isMobile ? constraints.maxWidth : 250,
+                                      isMobile ? constraints.maxWidth : 250,
+                                      regulationDepartment,
+                                    ),
+                                  ]),
+                                  Container(
+                                    alignment: Alignment.centerRight,
+                                    child: searchButton(isLight, () {}),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 3.h),
+                        roundBorder(
+                          context,
+                          isLight,
+                          [
+                            titleContent(
+                              isLight,
+                              tr('query_program'),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  compactQuery([
+                                    dropDownButtonSearch(
+                                      isLight,
+                                      isMobile ? constraints.maxWidth : 250,
+                                      isMobile ? constraints.maxWidth : 250,
+                                      programSemester,
+                                    ),
+                                    dropDownButtonSearch(
+                                      isLight,
+                                      isMobile ? constraints.maxWidth : 250,
+                                      isMobile ? constraints.maxWidth : 250,
+                                      creditProgram,
+                                    ),
+                                  ]),
+                                  Container(
+                                    alignment: Alignment.centerRight,
+                                    child: searchButton(isLight, () {}),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 3.h),
+                        roundBorder(
+                          context,
+                          isLight,
+                          [
+                            titleContent(
+                              isLight,
+                              tr('query_program'),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  compactQuery([
+                                    dropDownButtonSearch(
+                                      isLight,
+                                      isMobile ? constraints.maxWidth : 250,
+                                      isMobile ? constraints.maxWidth : 250,
+                                      programSemester,
+                                    ),
+                                    dropDownButtonSearch(
+                                      isLight,
+                                      isMobile ? constraints.maxWidth : 250,
+                                      isMobile ? constraints.maxWidth : 250,
+                                      creditProgram,
+                                    ),
+                                  ]),
+                                  Container(
+                                    alignment: Alignment.centerRight,
+                                    child: searchButton(isLight, () {}),
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),

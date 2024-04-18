@@ -7,6 +7,8 @@
   "query_basic": "Basic Query",
   "query_mix": "Mixed Query",
   "query_advanced": "Advanced Query",
+  "query_regulation": "Course Enrollment Regulations Inquiry",
+  "query_program": "Credit Program Inquiry",
   "search_hint": "Search",
   "basic_keyword": "Search keyword",
   "advance_teacher": "Teacher",

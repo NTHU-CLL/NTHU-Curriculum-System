@@ -7,6 +7,8 @@
   "query_basic": "基本查詢",
   "query_mix": "系級查詢",
   "query_advanced": "進階查詢",
+  "query_regulation": "擋修規定查詢",
+  "query_program": "學分學程查詢",
   "search_hint": "搜尋",
   "basic_keyword": "關鍵字查詢",
   "advance_teacher": "授課教師",
