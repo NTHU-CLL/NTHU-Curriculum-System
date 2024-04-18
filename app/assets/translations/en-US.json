@@ -7,6 +7,9 @@
   "query_basic": "Basic Query",
   "query_mix": "Mixed Query",
   "query_advanced": "Advanced Query",
-  "search_all": "All",
-  "search_hint": "Search"
+  "search_hint": "Search",
+  "basic_keyword": "Search keyword",
+  "advance_teacher": "Teacher",
+  "advance_code": "Course code",
+  "advance_general": "General course field"
 }

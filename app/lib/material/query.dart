@@ -4,7 +4,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 Widget compactQuery(List<Widget> items) {
   return Wrap(
-    spacing: 10,
+    spacing: 15,
     runSpacing: 10,
     alignment: WrapAlignment.start,
     runAlignment: WrapAlignment.start,

@@ -28,7 +28,7 @@ TextStyle bodyTitleStyle(bool isLight) {
 
 TextStyle bodyContentStyle(bool isLight) {
   return TextStyle(
-    fontSize: 16,
+    fontSize: 17,
     color: isLight ? Colors.black : Colors.white,
   );
 }
