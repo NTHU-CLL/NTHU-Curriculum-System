@@ -6,7 +6,7 @@ Widget hashTag(bool isLight, bool isOn, String tagText, Function() onPressed) {
     onTap: onPressed,
     child: IntrinsicWidth(
       child: Container(
-        height: 40,
+        height: 45,
         padding: const EdgeInsets.symmetric(horizontal: 12),
         alignment: Alignment.center,
         decoration: BoxDecoration(

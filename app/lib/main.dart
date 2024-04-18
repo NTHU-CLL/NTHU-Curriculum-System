@@ -144,8 +144,8 @@ class _MyAppState extends State<MyApp> {
                               compactQuery([
                                 dropDownButtonSearch(
                                   isLight,
-                                  isMobile ? constraints.maxWidth : 200,
-                                  isMobile ? constraints.maxWidth : 200,
+                                  isMobile ? constraints.maxWidth : 170,
+                                  isMobile ? constraints.maxWidth : 170,
                                   basicSemester,
                                 ),
                                 dropDownButtonSearch(
@@ -162,7 +162,7 @@ class _MyAppState extends State<MyApp> {
                                 ),
                                 dropDownButtonSearch(
                                   isLight,
-                                  isMobile ? constraints.maxWidth : 170,
+                                  isMobile ? constraints.maxWidth : 200,
                                   isMobile ? constraints.maxWidth : 150,
                                   basicStartTime,
                                 ),
@@ -176,8 +176,8 @@ class _MyAppState extends State<MyApp> {
                               compactQuery([
                                 dropDownButtonSearch(
                                   isLight,
-                                  isMobile ? constraints.maxWidth : 180,
-                                  isMobile ? constraints.maxWidth : 180,
+                                  isMobile ? constraints.maxWidth : 170,
+                                  isMobile ? constraints.maxWidth : 170,
                                   mixSemester,
                                 ),
                                 dropDownButtonSearch(
@@ -417,8 +417,8 @@ class _MyAppState extends State<MyApp> {
                                   compactQuery([
                                     dropDownButtonSearch(
                                       isLight,
-                                      isMobile ? constraints.maxWidth : 250,
-                                      isMobile ? constraints.maxWidth : 250,
+                                      isMobile ? constraints.maxWidth : 170,
+                                      isMobile ? constraints.maxWidth : 170,
                                       programSemester,
                                     ),
                                     dropDownButtonSearch(
@@ -448,50 +448,56 @@ class _MyAppState extends State<MyApp> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  compactQuery([
-                                    dropDownButtonSearch(
-                                      isLight,
-                                      isMobile ? constraints.maxWidth : 250,
-                                      isMobile ? constraints.maxWidth : 250,
-                                      expertiseSemester,
-                                    ),
-                                    dropDownButtonSearch(
-                                      isLight,
-                                      isMobile ? constraints.maxWidth : 250,
-                                      isMobile ? constraints.maxWidth : 250,
-                                      expertise1,
-                                    ),
-                                    dropDownButtonSearch(
-                                      isLight,
-                                      isMobile ? constraints.maxWidth : 250,
-                                      isMobile ? constraints.maxWidth : 250,
-                                      expertise2,
-                                    ),
-                                    hashTag(
-                                      isLight,
-                                      expertiseColumnar,
-                                      "college_columnar".tr(),
-                                      () {
-                                        setState(() {
-                                          expertiseColumnar = !expertiseColumnar;
-                                        });
-                                      },
-                                    ),
-                                    hashTag(
-                                      isLight,
-                                      expertiseTable,
-                                      "college_timetable".tr(),
-                                      () {
-                                        setState(() {
-                                          expertiseTable = !expertiseTable;
-                                        });
-                                      },
-                                    ),
-                                  ]),
-                                  Container(
-                                    alignment: Alignment.centerRight,
-                                    child: searchButton(isLight, () {}),
+                                  Expanded(
+                                    flex: 17,
+                                    child: compactQuery([
+                                      dropDownButtonSearch(
+                                        isLight,
+                                        isMobile ? constraints.maxWidth : 170,
+                                        isMobile ? constraints.maxWidth : 170,
+                                        expertiseSemester,
+                                      ),
+                                      dropDownButtonSearch(
+                                        isLight,
+                                        isMobile ? constraints.maxWidth : 230,
+                                        isMobile ? constraints.maxWidth : 230,
+                                        expertise1,
+                                      ),
+                                      dropDownButtonSearch(
+                                        isLight,
+                                        isMobile ? constraints.maxWidth : 230,
+                                        isMobile ? constraints.maxWidth : 230,
+                                        expertise2,
+                                      ),
+                                      hashTag(
+                                        isLight,
+                                        expertiseColumnar,
+                                        "college_columnar".tr(),
+                                        () {
+                                          setState(() {
+                                            expertiseColumnar = !expertiseColumnar;
+                                          });
+                                        },
+                                      ),
+                                      hashTag(
+                                        isLight,
+                                        expertiseTable,
+                                        "college_timetable".tr(),
+                                        () {
+                                          setState(() {
+                                            expertiseTable = !expertiseTable;
+                                          });
+                                        },
+                                      ),
+                                    ]),
                                   ),
+                                  Expanded(
+                                    flex: 3,
+                                    child: Container(
+                                      alignment: Alignment.centerRight,
+                                      child: searchButton(isLight, () {}),
+                                    ),
+                                  )
                                 ],
                               ),
                             ),
