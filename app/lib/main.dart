@@ -2,6 +2,9 @@ import 'style.dart';
 import 'object.dart';
 import 'define/week.dart';
 import 'define/time.dart';
+import 'define/class.dart';
+import 'define/grade.dart';
+import 'define/group.dart';
 import 'define/college.dart';
 import 'define/semester.dart';
 import 'define/department.dart';
@@ -155,31 +158,48 @@ class _MyAppState extends State<MyApp> {
                               compactQuery([
                                 dropDownButtonSearch(
                                   isLight,
-                                  isMobile ? constraints.maxWidth : 200,
-                                  isMobile ? constraints.maxWidth : 200,
+                                  isMobile ? constraints.maxWidth : 180,
+                                  isMobile ? constraints.maxWidth : 180,
                                   mixSemester,
                                 ),
                                 dropDownButtonSearch(
                                   isLight,
-                                  isMobile ? constraints.maxWidth : 200,
-                                  isMobile ? constraints.maxWidth : 200,
+                                  isMobile ? constraints.maxWidth : 180,
+                                  isMobile ? constraints.maxWidth : 180,
                                   mixCollege,
                                 ),
                                 dropDownButtonSearch(
                                   isLight,
-                                  isMobile ? constraints.maxWidth : 200,
-                                  isMobile ? constraints.maxWidth : 200,
+                                  isMobile ? constraints.maxWidth : 180,
+                                  isMobile ? constraints.maxWidth : 180,
                                   mixDepartment,
+                                ),
+                                dropDownButtonSearch(
+                                  isLight,
+                                  isMobile ? constraints.maxWidth : 150,
+                                  isMobile ? constraints.maxWidth : 180,
+                                  mixGrade,
+                                ),
+                                dropDownButtonSearch(
+                                  isLight,
+                                  isMobile ? constraints.maxWidth : 150,
+                                  isMobile ? constraints.maxWidth : 180,
+                                  mixClass,
+                                ),
+                                dropDownButtonSearch(
+                                  isLight,
+                                  isMobile ? constraints.maxWidth : 150,
+                                  isMobile ? constraints.maxWidth : 180,
+                                  mixGroup,
                                 ),
                               ]),
                             ),
-                            SizedBox(height: 1.h),
                             Container(
                               alignment: Alignment.centerRight,
                               child: IconButton(
                                 icon: Icon(
                                   showAdvance ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
-                                  size: 40,
+                                  size: 38,
                                   color: isLight ? Colors.grey : Colors.white,
                                 ),
                                 onPressed: () {
@@ -189,16 +209,19 @@ class _MyAppState extends State<MyApp> {
                                 },
                               ),
                             ),
-                            SizedBox(height: 1.h),
                             if (showAdvance)
                               titleContent(
                                 isLight,
                                 tr('query_advanced'),
-                                compactQuery([
-                                  keyword(isLight, advanceTeacher, isMobile ? constraints.maxWidth : 250, "advance_teacher".tr()),
-                                  keyword(isLight, advanceCode, isMobile ? constraints.maxWidth : 250, "advance_code".tr()),
-                                  keyword(isLight, advanceGeneral, isMobile ? constraints.maxWidth : 250, "advance_general".tr()),
-                                ]),
+                                Column(
+                                  children: [
+                                    compactQuery([
+                                      keyword(isLight, advanceTeacher, isMobile ? constraints.maxWidth : 250, "advance_teacher".tr()),
+                                      keyword(isLight, advanceCode, isMobile ? constraints.maxWidth : 250, "advance_code".tr()),
+                                      keyword(isLight, advanceGeneral, isMobile ? constraints.maxWidth : 250, "advance_general".tr()),
+                                    ]),
+                                  ],
+                                ),
                               ),
                           ],
                         ),
