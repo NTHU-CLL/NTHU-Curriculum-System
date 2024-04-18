@@ -1,18 +1,19 @@
 import '../object.dart';
 import 'package:flutter/material.dart';
 
-SearchQueryController basicStartTime = SearchQueryController(
-  select: "起始節次",
+SearchQueryController mixCollege = SearchQueryController(
+  select: "學院 College",
   search: TextEditingController(),
   subjects: [
-    "起始節次",
+    "學院 College",
     "1",
+    "1-1",
+    "1-2",
     "2",
     "3",
+    "3-1",
+    "3-2",
     "4",
     "5",
-    "6",
-    "7",
-    "8",
   ],
 );

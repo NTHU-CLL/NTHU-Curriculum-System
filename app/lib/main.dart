@@ -1,12 +1,13 @@
-import 'material/keyword.dart';
 import 'style.dart';
 import 'object.dart';
 import 'define/week.dart';
 import 'define/time.dart';
+import 'define/college.dart';
 import 'define/semester.dart';
 import 'define/department.dart';
 import 'material/frame.dart';
 import 'material/query.dart';
+import 'material/keyword.dart';
 import 'material/dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -40,7 +41,10 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   ThemeMode mainThemeMode = ThemeMode.system;
-  TextEditingController queryCtl = TextEditingController();
+  TextEditingController basicKeyword = TextEditingController();
+  TextEditingController advanceTeacher = TextEditingController();
+  TextEditingController advanceCode = TextEditingController();
+  TextEditingController advanceGeneral = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -116,11 +120,31 @@ class _MyAppState extends State<MyApp> {
                               isLight,
                               tr('query_basic'),
                               compactQuery([
-                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 200, querySemester),
-                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 250, queryDepartment),
-                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 180, queryWeek),
-                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 150, queryStartTime),
-                                keyword(isLight, queryCtl, isMobile ? constraints.maxWidth : 200),
+                                dropDownButtonSearch(
+                                  isLight,
+                                  isMobile ? constraints.maxWidth : 200,
+                                  isMobile ? constraints.maxWidth : 200,
+                                  basicSemester,
+                                ),
+                                dropDownButtonSearch(
+                                  isLight,
+                                  isMobile ? constraints.maxWidth : 250,
+                                  isMobile ? constraints.maxWidth : 250,
+                                  basicDepartment,
+                                ),
+                                dropDownButtonSearch(
+                                  isLight,
+                                  isMobile ? constraints.maxWidth : 180,
+                                  isMobile ? constraints.maxWidth : 180,
+                                  basicWeek,
+                                ),
+                                dropDownButtonSearch(
+                                  isLight,
+                                  isMobile ? constraints.maxWidth : 150,
+                                  isMobile ? constraints.maxWidth : 150,
+                                  basicStartTime,
+                                ),
+                                keyword(isLight, basicKeyword, isMobile ? constraints.maxWidth : 200, "basic_keyword".tr()),
                               ]),
                             ),
                             SizedBox(height: 3.h),
@@ -128,8 +152,24 @@ class _MyAppState extends State<MyApp> {
                               isLight,
                               tr('query_mix'),
                               compactQuery([
-                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 300, querySemester),
-                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 300, queryDepartment),
+                                dropDownButtonSearch(
+                                  isLight,
+                                  isMobile ? constraints.maxWidth : 200,
+                                  isMobile ? constraints.maxWidth : 200,
+                                  mixSemester,
+                                ),
+                                dropDownButtonSearch(
+                                  isLight,
+                                  isMobile ? constraints.maxWidth : 200,
+                                  isMobile ? constraints.maxWidth : 200,
+                                  mixCollege,
+                                ),
+                                dropDownButtonSearch(
+                                  isLight,
+                                  isMobile ? constraints.maxWidth : 200,
+                                  isMobile ? constraints.maxWidth : 200,
+                                  mixDepartment,
+                                ),
                               ]),
                             ),
                             SizedBox(height: 3.h),
@@ -137,8 +177,9 @@ class _MyAppState extends State<MyApp> {
                               isLight,
                               tr('query_advanced'),
                               compactQuery([
-                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 300, querySemester),
-                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 300, queryDepartment),
+                                keyword(isLight, advanceTeacher, isMobile ? constraints.maxWidth : 250, "advance_teacher".tr()),
+                                keyword(isLight, advanceCode, isMobile ? constraints.maxWidth : 250, "advance_code".tr()),
+                                keyword(isLight, advanceGeneral, isMobile ? constraints.maxWidth : 250, "advance_general".tr()),
                               ]),
                             ),
                           ],

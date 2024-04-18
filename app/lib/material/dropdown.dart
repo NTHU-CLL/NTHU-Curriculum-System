@@ -5,7 +5,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-Widget dropDownButtonSearch(bool isLight, double width, SearchQueryController queryCtl) {
+Widget dropDownButtonSearch(bool isLight, double widthTop, double widthList, SearchQueryController queryCtl) {
   return StatefulBuilder(
     builder: (BuildContext context, StateSetter setSearchState) {
       return DropdownButtonHideUnderline(
@@ -33,7 +33,7 @@ Widget dropDownButtonSearch(bool isLight, double width, SearchQueryController qu
           },
           buttonStyleData: ButtonStyleData(
             padding: const EdgeInsets.symmetric(horizontal: 8),
-            width: width,
+            width: widthTop,
             height: 45,
             decoration: BoxDecoration(
               color: isLight ? Colors.white : Colors.black,
@@ -43,6 +43,7 @@ Widget dropDownButtonSearch(bool isLight, double width, SearchQueryController qu
           ),
           dropdownStyleData: DropdownStyleData(
             maxHeight: 500,
+            width: widthList,
             padding: EdgeInsets.zero,
             decoration: BoxDecoration(
               color: isLight ? Colors.white : Colors.black,

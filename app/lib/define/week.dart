@@ -1,7 +1,7 @@
 import '../object.dart';
 import 'package:flutter/material.dart';
 
-SearchQueryController queryWeek = SearchQueryController(
+SearchQueryController basicWeek = SearchQueryController(
   select: "星期 Week",
   search: TextEditingController(),
   subjects: [
