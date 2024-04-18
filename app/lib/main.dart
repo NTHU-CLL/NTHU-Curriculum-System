@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+
 import 'define/expertise.dart';
 import 'style.dart';
 import 'object.dart';
@@ -132,6 +134,7 @@ class _MyAppState extends State<MyApp> {
                 margin: EdgeInsets.symmetric(vertical: 3.h, horizontal: isMobile ? 5.w : 20.w),
                 child: LayoutBuilder(
                   builder: (context, constraints) {
+                    double maxSize = constraints.maxWidth - 200;
                     return Column(
                       children: [
                         roundBorder(
@@ -389,7 +392,7 @@ class _MyAppState extends State<MyApp> {
                                   compactQuery([
                                     dropDownButtonSearch(
                                       isLight,
-                                      isMobile ? constraints.maxWidth : 250,
+                                      isMobile ? maxSize : 250,
                                       isMobile ? constraints.maxWidth : 250,
                                       regulationDepartment,
                                     ),
@@ -414,20 +417,23 @@ class _MyAppState extends State<MyApp> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  compactQuery([
-                                    dropDownButtonSearch(
-                                      isLight,
-                                      isMobile ? constraints.maxWidth : 170,
-                                      isMobile ? constraints.maxWidth : 170,
-                                      programSemester,
-                                    ),
-                                    dropDownButtonSearch(
-                                      isLight,
-                                      isMobile ? constraints.maxWidth : 250,
-                                      isMobile ? constraints.maxWidth : 250,
-                                      creditProgram,
-                                    ),
-                                  ]),
+                                  SizedBox(
+                                    width: maxSize,
+                                    child: compactQuery([
+                                      dropDownButtonSearch(
+                                        isLight,
+                                        isMobile ? maxSize : 170,
+                                        isMobile ? constraints.maxWidth : 170,
+                                        programSemester,
+                                      ),
+                                      dropDownButtonSearch(
+                                        isLight,
+                                        isMobile ? maxSize : 250,
+                                        isMobile ? constraints.maxWidth : 250,
+                                        creditProgram,
+                                      ),
+                                    ]),
+                                  ),
                                   Container(
                                     alignment: Alignment.centerRight,
                                     child: searchButton(isLight, () {}),
@@ -448,8 +454,8 @@ class _MyAppState extends State<MyApp> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Expanded(
-                                    flex: 17,
+                                  SizedBox(
+                                    width: maxSize,
                                     child: compactQuery([
                                       dropDownButtonSearch(
                                         isLight,
@@ -491,13 +497,10 @@ class _MyAppState extends State<MyApp> {
                                       ),
                                     ]),
                                   ),
-                                  Expanded(
-                                    flex: 3,
-                                    child: Container(
-                                      alignment: Alignment.centerRight,
-                                      child: searchButton(isLight, () {}),
-                                    ),
-                                  )
+                                  Container(
+                                    alignment: Alignment.centerRight,
+                                    child: searchButton(isLight, () {}),
+                                  ),
                                 ],
                               ),
                             ),
