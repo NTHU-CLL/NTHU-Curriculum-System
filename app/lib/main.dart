@@ -1,3 +1,4 @@
+import 'define/expertise.dart';
 import 'style.dart';
 import 'object.dart';
 import 'define/week.dart';
@@ -59,6 +60,8 @@ class _MyAppState extends State<MyApp> {
   bool advanceSub8 = false;
   bool advanceSub9 = false;
   bool advanceSub10 = false;
+  bool expertiseColumnar = false;
+  bool expertiseTable = false;
   ThemeMode mainThemeMode = ThemeMode.system;
   TextEditingController basicKeyword = TextEditingController();
   TextEditingController advanceTeacher = TextEditingController();
@@ -441,7 +444,7 @@ class _MyAppState extends State<MyApp> {
                           [
                             titleContent(
                               isLight,
-                              tr('query_program'),
+                              tr('query_college'),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
@@ -450,13 +453,39 @@ class _MyAppState extends State<MyApp> {
                                       isLight,
                                       isMobile ? constraints.maxWidth : 250,
                                       isMobile ? constraints.maxWidth : 250,
-                                      programSemester,
+                                      expertiseSemester,
                                     ),
                                     dropDownButtonSearch(
                                       isLight,
                                       isMobile ? constraints.maxWidth : 250,
                                       isMobile ? constraints.maxWidth : 250,
-                                      creditProgram,
+                                      expertise1,
+                                    ),
+                                    dropDownButtonSearch(
+                                      isLight,
+                                      isMobile ? constraints.maxWidth : 250,
+                                      isMobile ? constraints.maxWidth : 250,
+                                      expertise2,
+                                    ),
+                                    hashTag(
+                                      isLight,
+                                      expertiseColumnar,
+                                      "college_columnar".tr(),
+                                      () {
+                                        setState(() {
+                                          expertiseColumnar = !expertiseColumnar;
+                                        });
+                                      },
+                                    ),
+                                    hashTag(
+                                      isLight,
+                                      expertiseTable,
+                                      "college_timetable".tr(),
+                                      () {
+                                        setState(() {
+                                          expertiseTable = !expertiseTable;
+                                        });
+                                      },
                                     ),
                                   ]),
                                   Container(
