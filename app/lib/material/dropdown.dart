@@ -11,6 +11,12 @@ Widget dropDownButtonSearch(bool isLight, double width, SearchQueryController qu
       return DropdownButtonHideUnderline(
         child: DropdownButton2<String>(
           isExpanded: true,
+          iconStyleData: IconStyleData(
+            icon: Icon(
+              Icons.arrow_downward,
+              color: isLight ? Colors.black : Colors.white,
+            ),
+          ),
           items: queryCtl.subjects
               .map(
                 (item) => DropdownMenuItem(
@@ -28,6 +34,7 @@ Widget dropDownButtonSearch(bool isLight, double width, SearchQueryController qu
           buttonStyleData: ButtonStyleData(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             width: width,
+            height: 45,
             decoration: BoxDecoration(
               color: isLight ? Colors.white : Colors.black,
               borderRadius: BorderRadius.circular(10),

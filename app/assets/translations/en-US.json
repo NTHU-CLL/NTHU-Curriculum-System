@@ -8,5 +8,6 @@
   "query_mix": "Mixed Query",
   "query_advanced": "Advanced Query",
   "search_all": "All",
-  "search_hint": "Search"
+  "search_hint": "Search",
+  "search_keyword": "Search keyword"
 }

@@ -1,5 +1,8 @@
+import 'material/keyword.dart';
+import 'style.dart';
 import 'object.dart';
 import 'define/week.dart';
+import 'define/time.dart';
 import 'define/semester.dart';
 import 'define/department.dart';
 import 'material/frame.dart';
@@ -8,8 +11,6 @@ import 'material/dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:easy_localization/easy_localization.dart';
-
-import 'style.dart';
 
 List<Course> courses = [];
 
@@ -39,6 +40,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   ThemeMode mainThemeMode = ThemeMode.system;
+  TextEditingController queryCtl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -114,9 +116,11 @@ class _MyAppState extends State<MyApp> {
                               isLight,
                               tr('query_basic'),
                               compactQuery([
-                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 300, querySemester),
-                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 300, queryDepartment),
-                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 300, queryWeek),
+                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 200, querySemester),
+                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 250, queryDepartment),
+                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 180, queryWeek),
+                                dropDownButtonSearch(isLight, isMobile ? constraints.maxWidth : 150, queryStartTime),
+                                keyword(isLight, queryCtl, isMobile ? constraints.maxWidth : 200),
                               ]),
                             ),
                             SizedBox(height: 3.h),

@@ -8,5 +8,6 @@
   "query_mix": "系級查詢",
   "query_advanced": "進階查詢",
   "search_all": "全部",
-  "search_hint": "搜尋"
+  "search_hint": "搜尋",
+  "search_keyword": "關鍵字查詢"
 }
