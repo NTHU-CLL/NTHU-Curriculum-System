@@ -1,6 +1,5 @@
-import 'tab/map.dart';
-import 'tab/search.dart';
-import 'tab/prerequisite.dart';
+import 'config.dart';
+import 'router.dart';
 import 'package:flutter/material.dart';
 import 'package:url_strategy/url_strategy.dart';
 
@@ -17,14 +16,18 @@ class CurriculumSystem extends StatelessWidget {
     return MaterialApp(
       title: 'NTHU Curriculum',
       debugShowCheckedModeBanner: false,
-      initialRoute: '/search',
-      routes: {
-        '/search': (context) => const PageSearch(),
-        '/map': (context) => const PageMap(),
-        '/prerequisite': (context) => const PagePrerequisite(),
-      },
+      initialRoute: '/',
       onGenerateRoute: (settings) {
-        // Handle unknown routes
+        final Uri uri = Uri.parse(settings.name ?? '/');
+        final List<String> pathSegments = uri.pathSegments;
+        final String tabName = pathSegments.isEmpty ? mainPages.first.name : pathSegments.first;
+
+        if (mainPages.any((tab) => tab.name == tabName)) {
+          return MaterialPageRoute(
+            builder: (context) => MainPage(initialTab: tabName),
+          );
+        }
+
         return MaterialPageRoute(
           builder: (context) => const Scaffold(
             body: Center(

@@ -12,10 +12,10 @@ class _PageMapState extends State<PageMap> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Search'),
+        title: const Text('PageMap'),
       ),
       body: const Center(
-        child: Text('Search Page'),
+        child: Text('PageMap Page'),
       ),
     );
   }
