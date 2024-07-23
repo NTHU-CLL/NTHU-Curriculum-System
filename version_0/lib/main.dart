@@ -1,5 +1,3 @@
-import 'package:app/material/rwd.dart';
-
 import 'style.dart';
 import 'object.dart';
 import 'define/week.dart';
@@ -18,6 +16,7 @@ import 'material/button/hashtag.dart';
 import 'material/button/search.dart';
 import 'material/dropdown/appbar.dart';
 import 'material/dropdown/search.dart';
+import 'package:app/material/rwd.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:easy_localization/easy_localization.dart';
