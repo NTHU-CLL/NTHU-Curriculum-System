@@ -22,10 +22,12 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
       length: mainPages.length,
       initialIndex: mainPages.keys.toList().indexOf(widget.initialTab),
     );
+    _tabController.addListener(_handleTabSelection);
   }
 
   @override
   void dispose() {
+    _tabController.removeListener(_handleTabSelection);
     _tabController.dispose();
     super.dispose();
   }
@@ -37,17 +39,55 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
         title: TabBar(
           controller: _tabController,
           isScrollable: true,
-          tabs: mainPages.keys
-              .map((e) => Tab(
-                    child: Text(e).tr(),
-                  ))
+          tabs: mainPages.keys.indexed
+              .map(
+                (e) => Tab(
+                  child: Text(
+                    e.$2,
+                    style: TextStyle(
+                      color: e.$1 == _tabController.index ? componentColor6 : primaryColor1,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ).tr(),
+                ),
+              )
               .toList(),
         ),
+        actions: [
+          IconButton(
+            icon: Image.asset(
+              'assets/images/navbar/light_dark.png',
+              width: 30,
+            ),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: Image.asset(
+              'assets/images/navbar/language.png',
+              width: 30,
+            ),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: Image.asset(
+              'assets/images/navbar/schedule.png',
+              width: 30,
+            ),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: TabBarView(
         controller: _tabController,
         children: mainPages.values.toList(),
       ),
     );
+  }
+
+  void _handleTabSelection() {
+    if (_tabController.indexIsChanging) {
+      setState(() {});
+    }
   }
 }
