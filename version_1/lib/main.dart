@@ -35,9 +35,9 @@ class CurriculumSystem extends StatelessWidget {
       onGenerateRoute: (settings) {
         final Uri uri = Uri.parse(settings.name ?? '/');
         final List<String> pathSegments = uri.pathSegments;
-        final String tabName = pathSegments.isEmpty ? mainPages.first.name : pathSegments.first;
+        final String tabName = pathSegments.isEmpty ? mainPages.keys.first : pathSegments.first;
 
-        if (mainPages.any((tab) => tab.name == tabName)) {
+        if (mainPages.containsKey(tabName)) {
           return MaterialPageRoute(
             builder: (context) => MainPage(initialTab: tabName),
           );

@@ -1,3 +1,7 @@
 {
-  "helloWorld": "Hello World!"
+  "tab_search": "Curriculum Search",
+  "tab_rule" : "Course Prerequisites",
+  "tab_credit" : "Credit-Based Program",
+  "tab_interdisciplinary" : "Interdisciplinary Courses",
+  "tab_map" : "School Map"
 }
