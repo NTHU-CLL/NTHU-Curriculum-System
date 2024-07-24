@@ -7,6 +7,12 @@ import 'tab/interdisciplinary.dart';
 import 'package:flutter/material.dart';
 
 // ##### setting config
+// ### Language
+const List<Locale> supportedLocales = [
+  Locale('zh', 'TW'),
+  Locale('en', 'US'),
+];
+
 // ### Page route
 List<TabPage> mainPages = [
   TabPage('search', const Icon(Icons.search), const PageSearchClass()),
