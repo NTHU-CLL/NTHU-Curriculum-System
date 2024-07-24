@@ -1,5 +1,6 @@
 import 'config.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key, required this.initialTab});
@@ -19,7 +20,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     _tabController = TabController(
       vsync: this,
       length: mainPages.length,
-      initialIndex: mainPages.indexWhere((e) => e.name == widget.initialTab),
+      initialIndex: mainPages.keys.toList().indexOf(widget.initialTab),
     );
   }
 
@@ -36,12 +37,16 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
         title: TabBar(
           controller: _tabController,
           isScrollable: true,
-          tabs: mainPages.map((e) => Tab(child: e.indicator)).toList(),
+          tabs: mainPages.keys
+              .map((e) => Tab(
+                    child: Text(e).tr(),
+                  ))
+              .toList(),
         ),
       ),
       body: TabBarView(
         controller: _tabController,
-        children: mainPages.map((e) => e.content).toList(),
+        children: mainPages.values.toList(),
       ),
     );
   }
