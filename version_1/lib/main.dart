@@ -1,51 +1,41 @@
+import 'config.dart';
+import 'router.dart';
 import 'package:flutter/material.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 void main() {
-  runApp(const MyApp());
+  setPathUrlStrategy();
+  runApp(const CurriculumSystem());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class CurriculumSystem extends StatelessWidget {
+  const CurriculumSystem({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'NTHU Curriculum',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(),
-    );
-  }
-}
+      initialRoute: '/',
+      onGenerateRoute: (settings) {
+        final Uri uri = Uri.parse(settings.name ?? '/');
+        final List<String> pathSegments = uri.pathSegments;
+        final String tabName = pathSegments.isEmpty ? mainPages.first.name : pathSegments.first;
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+        if (mainPages.any((tab) => tab.name == tabName)) {
+          return MaterialPageRoute(
+            builder: (context) => MainPage(initialTab: tabName),
+          );
+        }
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("widget.title"),
-      ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'You have pushed the button this many times:',
+        return MaterialPageRoute(
+          builder: (context) => const Scaffold(
+            body: Center(
+              child: Text('404 - Page not found'),
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
