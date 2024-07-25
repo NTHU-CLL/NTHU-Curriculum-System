@@ -36,7 +36,14 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        toolbarHeight: 100,
+        backgroundColor: Colors.transparent,
+        shape: const Border(
+          bottom: BorderSide(color: primaryColor1, width: 1),
+        ),
         title: TabBar(
+          dividerColor: Colors.transparent,
           controller: _tabController,
           isScrollable: true,
           tabs: mainPages.keys.indexed
