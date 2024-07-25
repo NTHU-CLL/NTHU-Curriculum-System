@@ -3,5 +3,8 @@
   "tab_rule" : "擋修規定",
   "tab_credit" : "學分學程",
   "tab_interdisciplinary" : "院學士班課程",
-  "tab_map" : "校園地圖"
+  "tab_map" : "校園地圖",
+  "search_filter" : "課程篩選",
+  "search_input_hint" : "輸入課程關鍵字、代號或授課老師 ex：心諮系大二",
+  "search_start" : "搜尋"
 }

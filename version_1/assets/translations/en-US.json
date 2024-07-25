@@ -3,5 +3,8 @@
   "tab_rule" : "Course Prerequisites",
   "tab_credit" : "Credit-Based Program",
   "tab_interdisciplinary" : "Interdisciplinary Courses",
-  "tab_map" : "School Map"
+  "tab_map" : "School Map",
+  "search_filter" : "Class filter",
+  "search_input_hint" : "Enter course keywords, code, or instructor name e.g.: Computer Science Department",
+  "search_start" : "Search"
 }
