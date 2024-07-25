@@ -40,7 +40,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
         toolbarHeight: 100,
         backgroundColor: Colors.transparent,
         shape: const Border(
-          bottom: BorderSide(color: primaryColor1, width: 1),
+          bottom: BorderSide(color: colorPrimary1, width: 1),
         ),
         title: TabBar(
           dividerColor: Colors.transparent,
@@ -52,7 +52,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                   child: Text(
                     e.$2,
                     style: TextStyle(
-                      color: e.$1 == _tabController.index ? componentColor6 : primaryColor1,
+                      color: e.$1 == _tabController.index ? colorComponent6 : colorPrimary1,
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),

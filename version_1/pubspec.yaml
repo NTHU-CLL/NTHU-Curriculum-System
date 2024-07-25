@@ -31,4 +31,5 @@ flutter:
 
   assets:
     - assets/images/navbar/
+    - assets/images/search/
     - assets/translations/
