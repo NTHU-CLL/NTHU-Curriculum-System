@@ -21,6 +21,9 @@ const Color colorComponent7 = Color.fromRGBO(233, 85, 161, 1);
 
 // ### Font
 const double fontH2 = 32;
+const double fontH3 = 24;
+const double fontH4 = 20;
+const double fontRegular = 16;
 
 // ### Radius
 BorderRadius radiusButton = BorderRadius.circular(50);

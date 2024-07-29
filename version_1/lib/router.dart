@@ -34,29 +34,28 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    double widthRatio = MediaQuery.of(context).size.width / 1920;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         toolbarHeight: 150,
         backgroundColor: Colors.transparent,
         shape: const Border(bottom: BorderSide(color: colorPrimary1, width: 1)),
-        leadingWidth: 235 * widthRatio,
+        leadingWidth: 235,
         leading: Container(
-          width: 235 * widthRatio,
+          width: 235,
           alignment: Alignment.centerRight,
           child: IconButton(
-            icon: Image.asset('assets/images/navbar/logo.png', width: 125 * widthRatio, height: 120),
+            icon: Image.asset('assets/images/navbar/logo.png', width: 125, height: 120),
             onPressed: () {},
           ),
         ),
-        titleSpacing: 15,
+        titleSpacing: -35,
         title: TabBar(
           controller: _tabController,
           isScrollable: true,
           indicatorWeight: 1,
           indicatorColor: colorPrimary1,
-          labelPadding: EdgeInsets.symmetric(horizontal: 40 * widthRatio),
+          labelPadding: const EdgeInsets.symmetric(horizontal: 25),
           dividerColor: Colors.transparent,
           tabs: mainPages.keys.indexed
               .map(
@@ -76,22 +75,22 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
         actions: [
           IconButton(
             padding: const EdgeInsets.all(0),
-            icon: Image.asset('assets/images/navbar/light_dark.png', width: 50 * widthRatio, height: 50),
+            icon: Image.asset('assets/images/navbar/light_dark.png', width: 50, height: 50),
             onPressed: () {},
           ),
           const SizedBox(width: 12),
           IconButton(
             padding: const EdgeInsets.all(0),
-            icon: Image.asset('assets/images/navbar/language.png', width: 50 * widthRatio, height: 50),
+            icon: Image.asset('assets/images/navbar/language.png', width: 50, height: 50),
             onPressed: () {},
           ),
           const SizedBox(width: 12),
           IconButton(
             padding: const EdgeInsets.all(0),
-            icon: Image.asset('assets/images/navbar/schedule.png', width: 50 * widthRatio, height: 50),
+            icon: Image.asset('assets/images/navbar/schedule.png', width: 50, height: 50),
             onPressed: () {},
           ),
-          SizedBox(width: 100 * widthRatio),
+          const SizedBox(width: 100),
         ],
       ),
       body: TabBarView(
