@@ -1,6 +1,8 @@
 import 'config.dart';
 import 'router.dart';
+import 'provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -11,11 +13,16 @@ void main() async {
   setPathUrlStrategy();
 
   runApp(
-    EasyLocalization(
-      supportedLocales: supportedLocales,
-      path: 'assets/translations',
-      startLocale: supportedLocales.first,
-      child: const CurriculumSystem(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => SettingsProvider()),
+      ],
+      child: EasyLocalization(
+        supportedLocales: supportedLocales,
+        path: 'assets/translations',
+        startLocale: supportedLocales.first,
+        child: const CurriculumSystem(),
+      ),
     ),
   );
 }
