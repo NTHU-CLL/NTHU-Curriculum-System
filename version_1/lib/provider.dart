@@ -1,20 +1,29 @@
+import 'config.dart';
 import 'package:flutter/material.dart';
 
 class SettingsProvider extends ChangeNotifier {
-  bool _isChinese = true;
   bool _darkMode = false;
-
-  bool get isChinese => _isChinese;
+  DeviceScreen _deviceScreen = DeviceScreen.desktop;
+  SystemLanguage _systemLanguage = SystemLanguage.chinese;
 
   bool get darkMode => _darkMode;
 
-  void toggleLanguage() {
-    _isChinese = !_isChinese;
+  DeviceScreen get deviceScreen => _deviceScreen;
+
+  SystemLanguage get systemLanguage => _systemLanguage;
+
+  void toggleThemeMode() {
+    _darkMode = !_darkMode;
     notifyListeners();
   }
 
-  void toggleDarkMode() {
-    _darkMode = !_darkMode;
+  void setViewMode(DeviceScreen screen) {
+    _deviceScreen = screen;
+    notifyListeners();
+  }
+
+  void toggleLanguage(SystemLanguage language) {
+    _systemLanguage = language;
     notifyListeners();
   }
 }

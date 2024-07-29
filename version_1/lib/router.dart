@@ -36,76 +36,92 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(
-      builder: (context, SettingsProvider settings, child) {
-        return Scaffold(
-          appBar: AppBar(
-            elevation: 0,
-            toolbarHeight: 150,
-            backgroundColor: settings.darkMode ? darkBackground : lightBackground,
-            shape: const Border(bottom: BorderSide(color: lightPrimary1, width: 1)),
-            leadingWidth: 235,
-            leading: Container(
-              width: 235,
-              alignment: Alignment.centerRight,
-              child: IconButton(
-                icon: Image.asset('assets/images/navbar/logo.png', width: 125, height: 120),
-                onPressed: () {},
-              ),
-            ),
-            titleSpacing: -35,
-            title: TabBar(
-              controller: _tabController,
-              isScrollable: true,
-              indicatorWeight: 1,
-              indicatorColor: lightPrimary1,
-              labelPadding: const EdgeInsets.symmetric(horizontal: 25),
-              dividerColor: Colors.transparent,
-              tabs: mainPages.keys.indexed
-                  .map(
-                    (e) => Tab(
-                      child: Text(
-                        e.$2,
-                        style: TextStyle(
-                          color: e.$1 == _tabController.index ? lightComponent6 : lightPrimary1,
-                          fontSize: fontH2,
-                          fontWeight: FontWeight.bold,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        WidgetsBinding.instance.addPostFrameCallback((_) => updateSettings(context));
+        return Consumer(
+          builder: (context, SettingsProvider settings, child) {
+            return Scaffold(
+              appBar: AppBar(
+                elevation: 0,
+                toolbarHeight: 150,
+                backgroundColor: settings.darkMode ? darkBackground : lightBackground,
+                shape: const Border(bottom: BorderSide(color: lightPrimary1, width: 1)),
+                leadingWidth: 235,
+                leading: Container(
+                  width: 235,
+                  alignment: Alignment.centerRight,
+                  child: IconButton(
+                    icon: Image.asset('assets/images/navbar/logo.png', width: 125, height: 120),
+                    onPressed: () {},
+                  ),
+                ),
+                titleSpacing: -35,
+                title: TabBar(
+                  controller: _tabController,
+                  isScrollable: true,
+                  indicatorWeight: 1,
+                  indicatorColor: lightPrimary1,
+                  labelPadding: const EdgeInsets.symmetric(horizontal: 25),
+                  dividerColor: Colors.transparent,
+                  tabs: mainPages.keys.indexed
+                      .map(
+                        (e) => Tab(
+                          child: Text(
+                            e.$2,
+                            style: TextStyle(
+                              color: e.$1 == _tabController.index ? lightComponent6 : lightPrimary1,
+                              fontSize: fontH2,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ).tr(),
                         ),
-                      ).tr(),
-                    ),
-                  )
-                  .toList(),
-            ),
-            actions: [
-              IconButton(
-                padding: const EdgeInsets.all(0),
-                icon: Image.asset('assets/images/navbar/light_dark.png', width: 50, height: 50),
-                onPressed: () {
-                  settings.toggleDarkMode();
-                },
+                      )
+                      .toList(),
+                ),
+                actions: [
+                  IconButton(
+                    padding: const EdgeInsets.all(0),
+                    icon: Image.asset('assets/images/navbar/light_dark.png', width: 50, height: 50),
+                    onPressed: () {
+                      settings.toggleThemeMode();
+                    },
+                  ),
+                  const SizedBox(width: 12),
+                  IconButton(
+                    padding: const EdgeInsets.all(0),
+                    icon: Image.asset('assets/images/navbar/language.png', width: 50, height: 50),
+                    onPressed: () {},
+                  ),
+                  const SizedBox(width: 12),
+                  IconButton(
+                    padding: const EdgeInsets.all(0),
+                    icon: Image.asset('assets/images/navbar/schedule.png', width: 50, height: 50),
+                    onPressed: () {},
+                  ),
+                  const SizedBox(width: 100),
+                ],
               ),
-              const SizedBox(width: 12),
-              IconButton(
-                padding: const EdgeInsets.all(0),
-                icon: Image.asset('assets/images/navbar/language.png', width: 50, height: 50),
-                onPressed: () {},
+              body: TabBarView(
+                controller: _tabController,
+                children: mainPages.values.toList(),
               ),
-              const SizedBox(width: 12),
-              IconButton(
-                padding: const EdgeInsets.all(0),
-                icon: Image.asset('assets/images/navbar/schedule.png', width: 50, height: 50),
-                onPressed: () {},
-              ),
-              const SizedBox(width: 100),
-            ],
-          ),
-          body: TabBarView(
-            controller: _tabController,
-            children: mainPages.values.toList(),
-          ),
+            );
+          },
         );
       },
     );
+  }
+
+  void updateSettings(BuildContext context) {
+    final settings = Provider.of<SettingsProvider>(context, listen: false);
+    if (MediaQuery.of(context).size.width < mobileThreshold) {
+      settings.setViewMode(DeviceScreen.mobile);
+    } else {
+      settings.setViewMode(DeviceScreen.desktop);
+    }
+    print(settings.deviceScreen);
+    print(MediaQuery.of(context).size.width);
   }
 
   void _handleTabSelection() {
