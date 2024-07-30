@@ -43,9 +43,16 @@ const Color lightComponent7 = Color.fromRGBO(233, 85, 161, 1);
 // # Dark theme
 const Color darkBackground = Color.fromRGBO(42, 42, 42, 1);
 const Color darkError = Color.fromRGBO(243, 13, 13, 1);
-const Color darkPrimary1 = Color.fromRGBO(141, 40, 145, 1);
-const Color darkPrimary2 = Color.fromRGBO(17, 97, 39, 1);
+const Color darkPrimary1 = Color.fromRGBO(181, 42, 203, 1);
+const Color darkPrimary2 = Color.fromRGBO(60, 195, 38, 1);
 const Color darkSecondary = Color.fromRGBO(231, 153, 193, 1);
+const Color darkComponent1 = Color.fromRGBO(83, 210, 39, 1);
+const Color darkComponent2 = Color.fromRGBO(250, 137, 195, 1);
+const Color darkComponent3 = Color.fromRGBO(180, 180, 180, 1);
+const Color darkComponent4 = Color.fromRGBO(218, 218, 218, 1);
+const Color darkComponent5 = Color.fromRGBO(71, 192, 29, 1);
+const Color darkComponent6 = Color.fromRGBO(138, 19, 143, 1);
+const Color darkComponent7 = Color.fromRGBO(233, 85, 161, 1);
 
 // # Font
 const double fontH2 = 32;
@@ -61,4 +68,13 @@ BorderRadius radiusButton = BorderRadius.circular(50);
 enum DeviceScreen { mobile, tablet, desktop }
 
 // # Language
-enum SystemLanguage { chinese, english }
+enum SystemLanguage {
+  chinese(locale: Locale('zh', 'TW')),
+  english(locale: Locale('en', 'US'));
+
+  const SystemLanguage({
+    required this.locale,
+  });
+
+  final Locale locale;
+}

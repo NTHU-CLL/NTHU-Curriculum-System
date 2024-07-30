@@ -91,7 +91,15 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                   IconButton(
                     padding: const EdgeInsets.all(0),
                     icon: Image.asset('assets/images/navbar/language.png', width: 50, height: 50),
-                    onPressed: () {},
+                    onPressed: () {
+                      if (settings.systemLanguage == SystemLanguage.chinese) {
+                        context.setLocale(SystemLanguage.english.locale);
+                        settings.toggleLanguage(SystemLanguage.english);
+                      } else {
+                        context.setLocale(SystemLanguage.chinese.locale);
+                        settings.toggleLanguage(SystemLanguage.chinese);
+                      }
+                    },
                   ),
                   const SizedBox(width: 12),
                   IconButton(
@@ -122,6 +130,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     }
     print(settings.deviceScreen);
     print(MediaQuery.of(context).size.width);
+    print("======================");
   }
 
   void _handleTabSelection() {
