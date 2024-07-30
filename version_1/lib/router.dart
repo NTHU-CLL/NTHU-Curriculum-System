@@ -57,28 +57,30 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                   ),
                 ),
                 titleSpacing: -35,
-                title: TabBar(
-                  controller: _tabController,
-                  isScrollable: true,
-                  indicatorWeight: 1,
-                  indicatorColor: lightPrimary1,
-                  labelPadding: const EdgeInsets.symmetric(horizontal: 25),
-                  dividerColor: Colors.transparent,
-                  tabs: mainPages.keys.indexed
-                      .map(
-                        (e) => Tab(
-                          child: Text(
-                            e.$2,
-                            style: TextStyle(
-                              color: e.$1 == _tabController.index ? lightComponent6 : lightPrimary1,
-                              fontSize: fontH2,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ).tr(),
-                        ),
+                title: settings.deviceScreen == DeviceScreen.desktop
+                    ? TabBar(
+                        controller: _tabController,
+                        isScrollable: true,
+                        indicatorWeight: 1,
+                        indicatorColor: lightPrimary1,
+                        labelPadding: const EdgeInsets.symmetric(horizontal: 25),
+                        dividerColor: Colors.transparent,
+                        tabs: mainPages.keys.indexed
+                            .map(
+                              (e) => Tab(
+                                child: Text(
+                                  e.$2,
+                                  style: TextStyle(
+                                    color: e.$1 == _tabController.index ? lightComponent6 : lightPrimary1,
+                                    fontSize: fontH2,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ).tr(),
+                              ),
+                            )
+                            .toList(),
                       )
-                      .toList(),
-                ),
+                    : null,
                 actions: [
                   IconButton(
                     padding: const EdgeInsets.all(0),
@@ -123,14 +125,15 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
 
   void updateSettings(BuildContext context) {
     final settings = Provider.of<SettingsProvider>(context, listen: false);
-    if (MediaQuery.of(context).size.width < mobileThreshold) {
+    final double currentWidth = MediaQuery.of(context).size.width;
+
+    if (currentWidth < mobileThreshold) {
       settings.setViewMode(DeviceScreen.mobile);
+      settings.setWidthFactor(currentWidth / designWidthMobile);
     } else {
       settings.setViewMode(DeviceScreen.desktop);
+      settings.setWidthFactor(currentWidth / designWidthDesktop);
     }
-    print(settings.deviceScreen);
-    print(MediaQuery.of(context).size.width);
-    print("======================");
   }
 
   void _handleTabSelection() {

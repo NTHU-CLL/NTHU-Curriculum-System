@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 // ### System
 // # device threshold
 const double mobileThreshold = 850;
+const double designWidthMobile = 1080;
+const double designWidthDesktop = 1920;
 
 // # Language
 const List<Locale> supportedLocales = [
