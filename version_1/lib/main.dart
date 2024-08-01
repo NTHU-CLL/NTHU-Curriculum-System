@@ -1,8 +1,6 @@
 import 'config.dart';
 import 'router.dart';
-import 'provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -13,16 +11,11 @@ void main() async {
   setPathUrlStrategy();
 
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => SettingsProvider()),
-      ],
-      child: EasyLocalization(
-        supportedLocales: supportedLocales,
-        path: 'assets/translations',
-        startLocale: supportedLocales.first,
-        child: const CurriculumSystem(),
-      ),
+    EasyLocalization(
+      supportedLocales: supportedLocales,
+      path: 'assets/translations',
+      startLocale: supportedLocales.first,
+      child: const CurriculumSystem(),
     ),
   );
 }
@@ -42,9 +35,9 @@ class CurriculumSystem extends StatelessWidget {
       onGenerateRoute: (settings) {
         final Uri uri = Uri.parse(settings.name ?? '/');
         final List<String> pathSegments = uri.pathSegments;
-        final String tabName = pathSegments.isEmpty ? mainPages.keys.first : pathSegments.first;
+        final String tabName = pathSegments.isEmpty ? tabNames.first : pathSegments.first;
 
-        if (mainPages.containsKey(tabName)) {
+        if (tabNames.contains(tabName)) {
           return MaterialPageRoute(
             builder: (context) => MainPage(initialTab: tabName),
           );

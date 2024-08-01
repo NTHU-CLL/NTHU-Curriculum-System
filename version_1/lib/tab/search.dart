@@ -1,11 +1,12 @@
 import '../config.dart';
-import '../provider.dart';
+import '../object.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class PageSearchClass extends StatefulWidget {
-  const PageSearchClass({super.key});
+  const PageSearchClass({super.key, required this.ctl});
+
+  final SystemController ctl;
 
   @override
   State<PageSearchClass> createState() => _PageSearchClassState();
@@ -39,20 +40,16 @@ class _PageSearchClassState extends State<PageSearchClass> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(
-      builder: (context, SettingsProvider settings, child) {
-        return SingleChildScrollView(
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 50),
-            color: settings.darkMode ? darkBackground : lightBackground,
-            child: showFilters ? searchFilter(context, settings) : searchBar(context, settings),
-          ),
-        );
-      },
+    return SingleChildScrollView(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 50),
+        color: widget.ctl.isDarkMode ? darkBackground : lightBackground,
+        child: showFilters ? searchFilter(context) : searchBar(context),
+      ),
     );
   }
 
-  Widget searchBar(BuildContext context, SettingsProvider settings) {
+  Widget searchBar(BuildContext context) {
     return Column(
       children: [
         Container(
@@ -93,7 +90,7 @@ class _PageSearchClassState extends State<PageSearchClass> {
           children: [
             if (searchFocusNode.hasFocus)
               Container(
-                width: 646 * settings.widthFactor,
+                width: 646 * widget.ctl.widthFactor,
                 height: 363,
                 padding: const EdgeInsets.only(top: 85),
                 decoration: BoxDecoration(
@@ -111,14 +108,14 @@ class _PageSearchClassState extends State<PageSearchClass> {
                       },
                       child: Container(
                         height: 68,
-                        padding: EdgeInsets.symmetric(horizontal: 16 * settings.widthFactor),
+                        padding: EdgeInsets.symmetric(horizontal: 16 * widget.ctl.widthFactor),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Image(
                               image: const AssetImage('assets/images/search/history.png'),
-                              width: 42 * settings.widthFactor,
+                              width: 42 * widget.ctl.widthFactor,
                               height: 42,
                             ),
                             Expanded(
@@ -126,7 +123,7 @@ class _PageSearchClassState extends State<PageSearchClass> {
                                 searchHistory[index],
                                 style: TextStyle(
                                   fontSize: fontH3,
-                                  color: settings.darkMode ? lightBackground : darkBackground,
+                                  color: widget.ctl.isDarkMode ? darkBackground : lightBackground,
                                 ),
                               ),
                             ),
@@ -137,7 +134,7 @@ class _PageSearchClassState extends State<PageSearchClass> {
                               },
                               child: Image(
                                 image: const AssetImage('assets/images/search/remove.png'),
-                                width: 42 * settings.widthFactor,
+                                width: 42 * widget.ctl.widthFactor,
                                 height: 42,
                               ),
                             )
@@ -149,10 +146,10 @@ class _PageSearchClassState extends State<PageSearchClass> {
                 ),
               ),
             Container(
-              width: 646 * settings.widthFactor,
+              width: 646 * widget.ctl.widthFactor,
               height: 74,
               decoration: BoxDecoration(
-                color: settings.darkMode ? darkBackground : lightBackground,
+                color: widget.ctl.isDarkMode ? darkBackground : lightBackground,
                 borderRadius: radiusButton,
                 border: Border.all(color: lightSecondary, width: 2),
               ),
@@ -162,17 +159,17 @@ class _PageSearchClassState extends State<PageSearchClass> {
                 children: [
                   Image(
                     image: const AssetImage('assets/images/search/search.png'),
-                    width: 35 * settings.widthFactor,
+                    width: 35 * widget.ctl.widthFactor,
                     height: 35,
                   ),
                   SizedBox(
-                    width: 560 * settings.widthFactor,
+                    width: 560 * widget.ctl.widthFactor,
                     child: TextField(
                       focusNode: searchFocusNode,
                       controller: searchText,
                       style: TextStyle(
                         fontSize: fontH3,
-                        color: settings.darkMode ? lightBackground : darkBackground,
+                        color: widget.ctl.isDarkMode ? lightBackground : darkBackground,
                       ),
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.all(10.0),
@@ -186,7 +183,7 @@ class _PageSearchClassState extends State<PageSearchClass> {
                     onTap: () {},
                     child: Image(
                       image: const AssetImage('assets/images/search/mic.png'),
-                      width: 30 * settings.widthFactor,
+                      width: 30 * widget.ctl.widthFactor,
                       height: 30,
                     ),
                   ),
@@ -220,7 +217,7 @@ class _PageSearchClassState extends State<PageSearchClass> {
     );
   }
 
-  Widget searchFilter(BuildContext context, SettingsProvider settings) {
+  Widget searchFilter(BuildContext context) {
     return Container(
       alignment: Alignment.centerLeft,
       child: InkWell(
@@ -230,7 +227,7 @@ class _PageSearchClassState extends State<PageSearchClass> {
           });
         },
         child: Container(
-          width: 164 * settings.widthFactor,
+          width: 164 * widget.ctl.widthFactor,
           height: 46,
           decoration: BoxDecoration(
             color: lightPrimary2,
@@ -242,10 +239,10 @@ class _PageSearchClassState extends State<PageSearchClass> {
             children: [
               Image(
                 image: const AssetImage('assets/images/search/filter.png'),
-                width: 30 * settings.widthFactor,
+                width: 30 * widget.ctl.widthFactor,
                 height: 30,
               ),
-              SizedBox(width: 6 * settings.widthFactor),
+              SizedBox(width: 6 * widget.ctl.widthFactor),
               const Text(
                 "search_filter",
                 style: TextStyle(
