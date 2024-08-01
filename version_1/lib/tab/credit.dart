@@ -1,7 +1,10 @@
+import '../object.dart';
 import 'package:flutter/material.dart';
 
 class PageCreditProgram extends StatefulWidget {
-  const PageCreditProgram({super.key});
+  const PageCreditProgram({super.key, required this.ctl});
+
+  final SystemController ctl;
 
   @override
   State<PageCreditProgram> createState() => _PageCreditProgramState();

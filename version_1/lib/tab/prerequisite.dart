@@ -1,7 +1,10 @@
+import '../object.dart';
 import 'package:flutter/material.dart';
 
 class PagePrerequisite extends StatefulWidget {
-  const PagePrerequisite({super.key});
+  const PagePrerequisite({super.key, required this.ctl});
+
+  final SystemController ctl;
 
   @override
   State<PagePrerequisite> createState() => _PagePrerequisiteState();

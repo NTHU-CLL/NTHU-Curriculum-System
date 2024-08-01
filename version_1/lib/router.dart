@@ -123,10 +123,10 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
         controller: _tabController,
         children: [
           PageSearchClass(ctl: ctl),
-          const PagePrerequisite(),
-          const PageCreditProgram(),
-          const PageInterdisciplinary(),
-          const PageMap(),
+          PagePrerequisite(ctl: ctl),
+          PageCreditProgram(ctl: ctl),
+          PageInterdisciplinary(ctl: ctl),
+          PageMap(ctl: ctl),
         ],
       ),
     );

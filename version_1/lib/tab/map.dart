@@ -1,7 +1,10 @@
+import '../object.dart';
 import 'package:flutter/material.dart';
 
 class PageMap extends StatefulWidget {
-  const PageMap({super.key});
+  const PageMap({super.key, required this.ctl});
+
+  final SystemController ctl;
 
   @override
   State<PageMap> createState() => _PageMapState();
