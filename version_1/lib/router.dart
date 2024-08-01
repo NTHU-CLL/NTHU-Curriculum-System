@@ -18,6 +18,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
+  bool openDrawer = false;
   SystemController ctl = SystemController(
     isMobile: false,
     isChinese: true,
@@ -52,10 +53,15 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
         elevation: 0,
         toolbarHeight: 150,
         backgroundColor: ctl.isDarkMode ? darkBackground : lightBackground,
-        shape: const Border(bottom: BorderSide(color: lightPrimary1, width: 1)),
-        leadingWidth: 235,
+        shape: Border(
+          bottom: BorderSide(
+            width: 1,
+            color: ctl.isMobile ? Colors.transparent : colorPrimary1,
+          ),
+        ),
+        leadingWidth: ctl.isMobile ? 185 : 235,
         leading: Container(
-          width: 235,
+          width: ctl.isMobile ? 185 : 235,
           alignment: Alignment.centerRight,
           child: IconButton(
             icon: Image.asset('assets/images/navbar/logo.png', width: 125, height: 120),
@@ -69,7 +75,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                 controller: _tabController,
                 isScrollable: true,
                 indicatorWeight: 1,
-                indicatorColor: lightPrimary1,
+                indicatorColor: colorPrimary1,
                 labelPadding: const EdgeInsets.symmetric(horizontal: 25),
                 dividerColor: Colors.transparent,
                 tabs: tabNames.asMap().entries.map((e) {
@@ -77,11 +83,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                     child: Text(
                       e.value.tr(),
                       style: TextStyle(
-                        color: e.key == _tabController.index
-                            ? lightComponent6
-                            : ctl.isDarkMode
-                                ? lightPrimary1
-                                : darkPrimary1,
+                        color: e.key == _tabController.index ? colorComponent6 : colorPrimary1,
                         fontSize: fontH2,
                         fontWeight: FontWeight.bold,
                       ),
@@ -92,7 +94,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
         actions: [
           IconButton(
             padding: const EdgeInsets.all(0),
-            icon: Image.asset('assets/images/navbar/light_dark.png', width: 50, height: 50),
+            icon: Image.asset('assets/images/navbar/light_dark.png', width: 48, height: 48),
             onPressed: () {
               setState(() {
                 ctl.isDarkMode = !ctl.isDarkMode;
@@ -102,7 +104,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           const SizedBox(width: 12),
           IconButton(
             padding: const EdgeInsets.all(0),
-            icon: Image.asset('assets/images/navbar/language.png', width: 50, height: 50),
+            icon: Image.asset('assets/images/navbar/language.png', width: 48, height: 48),
             onPressed: () {
               setState(() {
                 ctl.isChinese = !ctl.isChinese;
@@ -113,10 +115,73 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           const SizedBox(width: 12),
           IconButton(
             padding: const EdgeInsets.all(0),
-            icon: Image.asset('assets/images/navbar/schedule.png', width: 50, height: 50),
+            icon: Image.asset('assets/images/navbar/schedule.png', width: 48, height: 48),
             onPressed: () {},
           ),
-          const SizedBox(width: 100),
+          const SizedBox(width: 12),
+          if (ctl.isMobile)
+            IconButton(
+              padding: const EdgeInsets.all(0),
+              icon: const Icon(Icons.menu, size: 48, color: colorPrimary1),
+              onPressed: () {
+                showDialog(
+                  barrierColor: Colors.transparent,
+                  context: context,
+                  builder: (context) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        const SizedBox(height: 50),
+                        Container(
+                          height: 272,
+                          margin: const EdgeInsets.only(right: 50),
+                          decoration: BoxDecoration(
+                            color: ctl.isDarkMode ? darkBackground : lightBackground,
+                            border: Border.all(color: colorPrimary1, width: 1),
+                            borderRadius: radiusMenu,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              IconButton(
+                                padding: const EdgeInsets.all(0),
+                                icon: Image.asset('assets/images/search/remove.png', width: 50, height: 50),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: tabNames.asMap().entries.map((e) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      _tabController.animateTo(e.key);
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.fromLTRB(50, 0, 50, 15),
+                                      child: Text(
+                                        e.value.tr(),
+                                        style: TextStyle(
+                                          fontSize: fontMobileLarge,
+                                          decoration: TextDecoration.none,
+                                          color: e.key == _tabController.index ? colorComponent6 : colorPrimary1,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+            ),
+          SizedBox(width: ctl.isMobile ? 50 : 100),
         ],
       ),
       body: TabBarView(
