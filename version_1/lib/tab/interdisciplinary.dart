@@ -1,7 +1,10 @@
+import '../object.dart';
 import 'package:flutter/material.dart';
 
 class PageInterdisciplinary extends StatefulWidget {
-  const PageInterdisciplinary({super.key});
+  const PageInterdisciplinary({super.key, required this.ctl});
+
+  final SystemController ctl;
 
   @override
   State<PageInterdisciplinary> createState() => _PageInterdisciplinaryState();

@@ -1,7 +1,11 @@
 import 'config.dart';
-import 'provider.dart';
+import 'object.dart';
+import 'tab/map.dart';
+import 'tab/search.dart';
+import 'tab/prerequisite.dart';
+import 'tab/credit.dart';
+import 'tab/interdisciplinary.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class MainPage extends StatefulWidget {
@@ -14,6 +18,12 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
+  SystemController ctl = SystemController(
+    isMobile: false,
+    isChinese: true,
+    isDarkMode: false,
+    widthFactor: 1,
+  );
   late TabController _tabController;
 
   @override
@@ -21,121 +31,104 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     super.initState();
     _tabController = TabController(
       vsync: this,
-      length: mainPages.length,
-      initialIndex: mainPages.keys.toList().indexOf(widget.initialTab),
+      length: tabNames.length,
+      initialIndex: tabNames.indexWhere((element) => element == widget.initialTab),
     );
-    _tabController.addListener(_handleTabSelection);
   }
 
   @override
   void dispose() {
-    _tabController.removeListener(_handleTabSelection);
     _tabController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        WidgetsBinding.instance.addPostFrameCallback((_) => updateSettings(context));
-        return Consumer(
-          builder: (context, SettingsProvider settings, child) {
-            return Scaffold(
-              appBar: AppBar(
-                elevation: 0,
-                toolbarHeight: 150,
-                backgroundColor: settings.darkMode ? darkBackground : lightBackground,
-                shape: const Border(bottom: BorderSide(color: lightPrimary1, width: 1)),
-                leadingWidth: 235,
-                leading: Container(
-                  width: 235,
-                  alignment: Alignment.centerRight,
-                  child: IconButton(
-                    icon: Image.asset('assets/images/navbar/logo.png', width: 125, height: 120),
-                    onPressed: () {},
-                  ),
-                ),
-                titleSpacing: -35,
-                title: TabBar(
-                  controller: _tabController,
-                  isScrollable: true,
-                  indicatorWeight: 1,
-                  indicatorColor: lightPrimary1,
-                  labelPadding: const EdgeInsets.symmetric(horizontal: 25),
-                  dividerColor: Colors.transparent,
-                  tabs: mainPages.keys.indexed
-                      .map(
-                        (e) => Tab(
-                          child: Text(
-                            e.$2,
-                            style: TextStyle(
-                              color: e.$1 == _tabController.index ? lightComponent6 : lightPrimary1,
-                              fontSize: fontH2,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ).tr(),
-                        ),
-                      )
-                      .toList(),
-                ),
-                actions: [
-                  IconButton(
-                    padding: const EdgeInsets.all(0),
-                    icon: Image.asset('assets/images/navbar/light_dark.png', width: 50, height: 50),
-                    onPressed: () {
-                      settings.toggleThemeMode();
-                    },
-                  ),
-                  const SizedBox(width: 12),
-                  IconButton(
-                    padding: const EdgeInsets.all(0),
-                    icon: Image.asset('assets/images/navbar/language.png', width: 50, height: 50),
-                    onPressed: () {
-                      if (settings.systemLanguage == SystemLanguage.chinese) {
-                        context.setLocale(SystemLanguage.english.locale);
-                        settings.toggleLanguage(SystemLanguage.english);
-                      } else {
-                        context.setLocale(SystemLanguage.chinese.locale);
-                        settings.toggleLanguage(SystemLanguage.chinese);
-                      }
-                    },
-                  ),
-                  const SizedBox(width: 12),
-                  IconButton(
-                    padding: const EdgeInsets.all(0),
-                    icon: Image.asset('assets/images/navbar/schedule.png', width: 50, height: 50),
-                    onPressed: () {},
-                  ),
-                  const SizedBox(width: 100),
-                ],
-              ),
-              body: TabBarView(
+    double currentWidth = MediaQuery.of(context).size.width;
+    ctl.isMobile = currentWidth < mobileThreshold;
+    ctl.widthFactor = ctl.isMobile ? currentWidth / designWidthMobile : currentWidth / designWidthDesktop;
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        toolbarHeight: 150,
+        backgroundColor: ctl.isDarkMode ? darkBackground : lightBackground,
+        shape: const Border(bottom: BorderSide(color: lightPrimary1, width: 1)),
+        leadingWidth: 235,
+        leading: Container(
+          width: 235,
+          alignment: Alignment.centerRight,
+          child: IconButton(
+            icon: Image.asset('assets/images/navbar/logo.png', width: 125, height: 120),
+            onPressed: () {},
+          ),
+        ),
+        titleSpacing: -35,
+        title: ctl.isMobile
+            ? null
+            : TabBar(
                 controller: _tabController,
-                children: mainPages.values.toList(),
+                isScrollable: true,
+                indicatorWeight: 1,
+                indicatorColor: lightPrimary1,
+                labelPadding: const EdgeInsets.symmetric(horizontal: 25),
+                dividerColor: Colors.transparent,
+                tabs: tabNames.asMap().entries.map((e) {
+                  return Tab(
+                    child: Text(
+                      e.value.tr(),
+                      style: TextStyle(
+                        color: e.key == _tabController.index
+                            ? lightComponent6
+                            : ctl.isDarkMode
+                                ? lightPrimary1
+                                : darkPrimary1,
+                        fontSize: fontH2,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  );
+                }).toList(),
               ),
-            );
-          },
-        );
-      },
+        actions: [
+          IconButton(
+            padding: const EdgeInsets.all(0),
+            icon: Image.asset('assets/images/navbar/light_dark.png', width: 50, height: 50),
+            onPressed: () {
+              setState(() {
+                ctl.isDarkMode = !ctl.isDarkMode;
+              });
+            },
+          ),
+          const SizedBox(width: 12),
+          IconButton(
+            padding: const EdgeInsets.all(0),
+            icon: Image.asset('assets/images/navbar/language.png', width: 50, height: 50),
+            onPressed: () {
+              setState(() {
+                ctl.isChinese = !ctl.isChinese;
+                context.setLocale(ctl.isChinese ? supportedLocales.first : supportedLocales.last);
+              });
+            },
+          ),
+          const SizedBox(width: 12),
+          IconButton(
+            padding: const EdgeInsets.all(0),
+            icon: Image.asset('assets/images/navbar/schedule.png', width: 50, height: 50),
+            onPressed: () {},
+          ),
+          const SizedBox(width: 100),
+        ],
+      ),
+      body: TabBarView(
+        controller: _tabController,
+        children: [
+          PageSearchClass(ctl: ctl),
+          PagePrerequisite(ctl: ctl),
+          PageCreditProgram(ctl: ctl),
+          PageInterdisciplinary(ctl: ctl),
+          PageMap(ctl: ctl),
+        ],
+      ),
     );
-  }
-
-  void updateSettings(BuildContext context) {
-    final settings = Provider.of<SettingsProvider>(context, listen: false);
-    if (MediaQuery.of(context).size.width < mobileThreshold) {
-      settings.setViewMode(DeviceScreen.mobile);
-    } else {
-      settings.setViewMode(DeviceScreen.desktop);
-    }
-    print(settings.deviceScreen);
-    print(MediaQuery.of(context).size.width);
-    print("======================");
-  }
-
-  void _handleTabSelection() {
-    if (_tabController.indexIsChanging) {
-      setState(() {});
-    }
   }
 }

@@ -1,14 +1,11 @@
-import 'tab/map.dart';
-import 'tab/search.dart';
-import 'tab/prerequisite.dart';
-import 'tab/credit.dart';
-import 'tab/interdisciplinary.dart';
 import 'package:flutter/material.dart';
 
 // ##### Setting config
 // ### System
 // # device threshold
 const double mobileThreshold = 850;
+const double designWidthMobile = 1080;
+const double designWidthDesktop = 1920;
 
 // # Language
 const List<Locale> supportedLocales = [
@@ -16,14 +13,14 @@ const List<Locale> supportedLocales = [
   Locale('en', 'US'),
 ];
 
-// # Page route
-Map<String, Widget> mainPages = {
-  'tab_search': const PageSearchClass(),
-  'tab_rule': const PagePrerequisite(),
-  'tab_credit': const PageCreditProgram(),
-  'tab_interdisciplinary': const PageInterdisciplinary(),
-  'tab_map': const PageMap(),
-};
+// # Tab name
+List<String> tabNames = [
+  'tab_search',
+  'tab_rule',
+  'tab_credit',
+  'tab_interdisciplinary',
+  'tab_map',
+];
 
 // ### UI
 // # Light theme
@@ -62,19 +59,3 @@ const double fontRegular = 16;
 
 // # Radius
 BorderRadius radiusButton = BorderRadius.circular(50);
-
-// ### Enum
-// # Device screen
-enum DeviceScreen { mobile, tablet, desktop }
-
-// # Language
-enum SystemLanguage {
-  chinese(locale: Locale('zh', 'TW')),
-  english(locale: Locale('en', 'US'));
-
-  const SystemLanguage({
-    required this.locale,
-  });
-
-  final Locale locale;
-}
