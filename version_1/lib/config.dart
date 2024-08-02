@@ -43,6 +43,7 @@ const Color colorComponent6 = Color.fromRGBO(138, 19, 143, 1);
 const Color colorComponent7 = Color.fromRGBO(233, 85, 161, 1);
 
 // # Font
+const double fontP = 18;
 const double fontH2 = 32;
 const double fontH3 = 24;
 const double fontH4 = 20;
@@ -53,3 +54,7 @@ const double fontMobileRegular = 16;
 // # Radius
 BorderRadius radiusMenu = BorderRadius.circular(20);
 BorderRadius radiusButton = BorderRadius.circular(50);
+
+// # Time
+List<String> dayCodes = ["M", "T", "W", "R", "F", "S"];
+List<String> courseCodes = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c"];

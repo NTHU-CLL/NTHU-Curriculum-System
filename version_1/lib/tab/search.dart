@@ -13,8 +13,10 @@ class PageSearchClass extends StatefulWidget {
 }
 
 class _PageSearchClassState extends State<PageSearchClass> {
-  bool showFilters = false;
+  bool showFilters = true;
   String searchText = "";
+  List<List<bool>> selectedTimes = List.generate(6, (index) => List.generate(12, (index) => false));
+  List<List<bool>> selectedTimesHovered = List.generate(6, (index) => List.generate(12, (index) => false));
   List<String> searchHistory = ["123", "456", "789", "123"];
 
   @override
@@ -225,42 +227,104 @@ class _PageSearchClassState extends State<PageSearchClass> {
   }
 
   Widget searchFilter() {
-    return Container(
-      alignment: Alignment.centerLeft,
-      child: InkWell(
-        onTap: () {
-          setState(() {
-            showFilters = !showFilters;
-          });
-        },
-        child: Container(
-          width: 164 * widget.ctl.widthFactor,
-          height: 46,
-          decoration: BoxDecoration(
-            color: colorPrimary2,
-            borderRadius: radiusButton,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image(
-                image: const AssetImage('assets/images/search/filter.png'),
-                width: 30 * widget.ctl.widthFactor,
-                height: 30,
+    return Row(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "search_filter_time_query".tr(),
+              style: TextStyle(
+                fontSize: fontH3,
+                color: widget.ctl.isDarkMode ? lightBackground : darkBackground,
               ),
-              SizedBox(width: 6 * widget.ctl.widthFactor),
-              const Text(
-                "search_filter",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: fontRegular,
-                ),
-              ).tr(),
-            ],
-          ),
+            ),
+            Text(
+              "search_filter_time_query_hint".tr(),
+              style: const TextStyle(
+                fontSize: fontP,
+                color: colorComponent3,
+              ),
+            ),
+            const SizedBox(height: 30),
+            Container(
+              height: 55,
+              width: 415,
+              padding: const EdgeInsets.only(left: 35.2),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: dayCodes.map((e) {
+                  return SizedBox(
+                    width: 63,
+                    child: Text(
+                      e,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(fontSize: fontP),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+            SizedBox(
+              width: 490,
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 35.2,
+                    child: Column(
+                      children: courseCodes
+                          .map((e) => Container(
+                                height: 38,
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  e,
+                                  style: const TextStyle(fontSize: fontP),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ))
+                          .toList(),
+                    ),
+                  ),
+                  Row(
+                    children: selectedTimes.asMap().entries.map((e) {
+                      return Column(
+                        children: e.value.asMap().entries.map((f) {
+                          return InkWell(
+                            onTap: () {
+                              setState(() {
+                                selectedTimes[e.key][f.key] = !selectedTimes[e.key][f.key];
+                              });
+                            },
+                            onHover: (value) {
+                              setState(() {
+                                selectedTimesHovered[e.key][f.key] = value;
+                              });
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: selectedTimes[e.key][f.key]
+                                    ? colorPrimary2
+                                    : selectedTimesHovered[e.key][f.key]
+                                        ? colorComponent4
+                                        : widget.ctl.isDarkMode
+                                            ? darkBackground
+                                            : lightBackground,
+                                border: Border.all(color: colorPrimary1, width: 1),
+                              ),
+                              width: 63.3,
+                              height: 38,
+                            ),
+                          );
+                        }).toList(),
+                      );
+                    }).toList(),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
-      ),
+      ],
     );
   }
 }
