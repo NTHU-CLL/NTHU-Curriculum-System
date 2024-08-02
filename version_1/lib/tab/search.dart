@@ -284,13 +284,21 @@ class _PageSearchClassState extends State<PageSearchClass> {
               padding: EdgeInsets.only(left: 35.2 * widget.ctl.widthFactor),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: dayCodes.map((e) {
-                  return SizedBox(
-                    width: 63 * widget.ctl.widthFactor,
-                    child: Text(
-                      e,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: fontP),
+                children: dayCodes.asMap().entries.map((e) {
+                  return InkWell(
+                    onTap: () {
+                      for (var i = 0; i < selectedTimes[e.key].length; i++) {
+                        selectedTimes[e.key][i] = !selectedTimes[e.key][i];
+                      }
+                      setState(() {});
+                    },
+                    child: SizedBox(
+                      width: 63 * widget.ctl.widthFactor,
+                      child: Text(
+                        e.value,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontSize: fontP),
+                      ),
                     ),
                   );
                 }).toList(),
@@ -302,14 +310,24 @@ class _PageSearchClassState extends State<PageSearchClass> {
                   width: 35.2 * widget.ctl.widthFactor,
                   child: Column(
                     children: courseCodes
+                        .asMap()
+                        .entries
                         .map(
-                          (e) => Container(
-                            height: 38,
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              e,
-                              style: const TextStyle(fontSize: fontP),
-                              textAlign: TextAlign.center,
+                          (e) => InkWell(
+                            onTap: () {
+                              for (var i = 0; i < selectedTimes.length; i++) {
+                                selectedTimes[i][e.key] = !selectedTimes[i][e.key];
+                              }
+                              setState(() {});
+                            },
+                            child: Container(
+                              height: 38,
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                e.value,
+                                style: const TextStyle(fontSize: fontP),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                           ),
                         )
@@ -409,6 +427,7 @@ class _PageSearchClassState extends State<PageSearchClass> {
                                 padding: MaterialStateProperty.all(
                                   const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                                 ),
+                                overlayColor: MaterialStateProperty.all(colorComponent2),
                                 backgroundColor: MaterialStateProperty.all(
                                   e.onSelected
                                       ? colorSecondary
@@ -433,7 +452,7 @@ class _PageSearchClassState extends State<PageSearchClass> {
                       ],
                     ),
                   ),
-                  SizedBox(width: 50 * widget.ctl.widthFactor),
+                  SizedBox(width: 30 * widget.ctl.widthFactor),
                   Expanded(
                     flex: 1,
                     child: Column(
@@ -455,6 +474,7 @@ class _PageSearchClassState extends State<PageSearchClass> {
                                 padding: MaterialStateProperty.all(
                                   const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                                 ),
+                                overlayColor: MaterialStateProperty.all(colorComponent2),
                                 backgroundColor: MaterialStateProperty.all(
                                   e.onSelected
                                       ? colorSecondary
@@ -506,6 +526,7 @@ class _PageSearchClassState extends State<PageSearchClass> {
                                 padding: MaterialStateProperty.all(
                                   const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                                 ),
+                                overlayColor: MaterialStateProperty.all(colorComponent2),
                                 backgroundColor: MaterialStateProperty.all(
                                   e.onSelected
                                       ? colorSecondary
@@ -552,6 +573,7 @@ class _PageSearchClassState extends State<PageSearchClass> {
                                 padding: MaterialStateProperty.all(
                                   const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                                 ),
+                                overlayColor: MaterialStateProperty.all(colorComponent2),
                                 backgroundColor: MaterialStateProperty.all(
                                   e.onSelected
                                       ? colorSecondary
@@ -595,6 +617,7 @@ class _PageSearchClassState extends State<PageSearchClass> {
                       padding: MaterialStateProperty.all(
                         const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                       ),
+                      overlayColor: MaterialStateProperty.all(colorComponent2),
                       backgroundColor: MaterialStateProperty.all(
                         e.onSelected
                             ? colorSecondary
@@ -677,6 +700,7 @@ class _PageSearchClassState extends State<PageSearchClass> {
                       padding: MaterialStateProperty.all(
                         const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                       ),
+                      overlayColor: MaterialStateProperty.all(colorComponent2),
                       backgroundColor: MaterialStateProperty.all(
                         e.onSelected
                             ? colorSecondary
