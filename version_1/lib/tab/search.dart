@@ -15,9 +15,39 @@ class PageSearchClass extends StatefulWidget {
 class _PageSearchClassState extends State<PageSearchClass> {
   bool showFilters = true;
   String searchText = "";
+  TextEditingController filterInstitute = TextEditingController(text: "");
+  List<String> searchHistory = ["123", "456", "789", "123"];
+  List<FilterController> ctlDepartments = [];
+  List<FilterController> ctlGrades = [];
+  List<FilterController> ctlClasses = [];
+  List<FilterController> ctlGroups = [];
+  List<FilterController> ctlLanguages = [];
+  List<FilterController> ctlInstitutes = [];
   List<List<bool>> selectedTimes = List.generate(6, (index) => List.generate(12, (index) => false));
   List<List<bool>> selectedTimesHovered = List.generate(6, (index) => List.generate(12, (index) => false));
-  List<String> searchHistory = ["123", "456", "789", "123"];
+
+  @override
+  void initState() {
+    ctlDepartments = departments.map((e) {
+      return FilterController(onSelected: false, name: e);
+    }).toList();
+    ctlGrades = grades.map((e) {
+      return FilterController(onSelected: false, name: e);
+    }).toList();
+    ctlClasses = classes.map((e) {
+      return FilterController(onSelected: false, name: e);
+    }).toList();
+    ctlGroups = groups.map((e) {
+      return FilterController(onSelected: false, name: e);
+    }).toList();
+    ctlLanguages = languages.map((e) {
+      return FilterController(onSelected: false, name: e);
+    }).toList();
+    ctlInstitutes = institutes.map((e) {
+      return FilterController(onSelected: false, name: e);
+    }).toList();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -228,6 +258,7 @@ class _PageSearchClassState extends State<PageSearchClass> {
 
   Widget searchFilter() {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -249,13 +280,13 @@ class _PageSearchClassState extends State<PageSearchClass> {
             const SizedBox(height: 30),
             Container(
               height: 55,
-              width: 415,
-              padding: const EdgeInsets.only(left: 35.2),
+              width: 415 * widget.ctl.widthFactor,
+              padding: EdgeInsets.only(left: 35.2 * widget.ctl.widthFactor),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: dayCodes.map((e) {
                   return SizedBox(
-                    width: 63,
+                    width: 63 * widget.ctl.widthFactor,
                     child: Text(
                       e,
                       textAlign: TextAlign.center,
@@ -265,64 +296,410 @@ class _PageSearchClassState extends State<PageSearchClass> {
                 }).toList(),
               ),
             ),
-            SizedBox(
-              width: 490,
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 35.2,
-                    child: Column(
-                      children: courseCodes
-                          .map((e) => Container(
-                                height: 38,
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  e,
-                                  style: const TextStyle(fontSize: fontP),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ))
-                          .toList(),
-                    ),
-                  ),
-                  Row(
-                    children: selectedTimes.asMap().entries.map((e) {
-                      return Column(
-                        children: e.value.asMap().entries.map((f) {
-                          return InkWell(
-                            onTap: () {
-                              setState(() {
-                                selectedTimes[e.key][f.key] = !selectedTimes[e.key][f.key];
-                              });
-                            },
-                            onHover: (value) {
-                              setState(() {
-                                selectedTimesHovered[e.key][f.key] = value;
-                              });
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: selectedTimes[e.key][f.key]
-                                    ? colorPrimary2
-                                    : selectedTimesHovered[e.key][f.key]
-                                        ? colorComponent4
-                                        : widget.ctl.isDarkMode
-                                            ? darkBackground
-                                            : lightBackground,
-                                border: Border.all(color: colorPrimary1, width: 1),
-                              ),
-                              width: 63.3,
-                              height: 38,
+            Row(
+              children: [
+                SizedBox(
+                  width: 35.2 * widget.ctl.widthFactor,
+                  child: Column(
+                    children: courseCodes
+                        .map(
+                          (e) => Container(
+                            height: 38,
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              e,
+                              style: const TextStyle(fontSize: fontP),
+                              textAlign: TextAlign.center,
                             ),
-                          );
-                        }).toList(),
-                      );
-                    }).toList(),
+                          ),
+                        )
+                        .toList(),
                   ),
-                ],
+                ),
+                Row(
+                  children: selectedTimes.asMap().entries.map((e) {
+                    return Column(
+                      children: e.value.asMap().entries.map((f) {
+                        return InkWell(
+                          onTap: () {
+                            setState(() {
+                              selectedTimes[e.key][f.key] = !selectedTimes[e.key][f.key];
+                            });
+                          },
+                          onHover: (value) {
+                            setState(() {
+                              selectedTimesHovered[e.key][f.key] = value;
+                            });
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: selectedTimes[e.key][f.key]
+                                  ? colorPrimary2
+                                  : selectedTimesHovered[e.key][f.key]
+                                      ? colorComponent4
+                                      : widget.ctl.isDarkMode
+                                          ? darkBackground
+                                          : lightBackground,
+                              border: Border.all(color: colorPrimary1, width: 1),
+                            ),
+                            width: 63.3 * widget.ctl.widthFactor,
+                            height: 38,
+                          ),
+                        );
+                      }).toList(),
+                    );
+                  }).toList(),
+                ),
+              ],
+            ),
+            const SizedBox(height: 50),
+            Container(
+              width: 415 * widget.ctl.widthFactor,
+              alignment: Alignment.center,
+              child: InkWell(
+                onTap: () {
+                  setState(() {
+                    showFilters = !showFilters;
+                  });
+                },
+                child: Container(
+                  width: widget.ctl.isMobile ? 96 : 136,
+                  height: 66,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(color: colorPrimary2, borderRadius: radiusButton),
+                  child: Text(
+                    "search_filter_done",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: widget.ctl.isMobile ? fontMobileRegular : fontH4,
+                    ),
+                  ).tr(),
+                ),
               ),
             ),
           ],
+        ),
+        SizedBox(width: 60 * widget.ctl.widthFactor),
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("search_filter_department".tr(), style: const TextStyle(fontSize: fontH4)),
+                        const SizedBox(height: 10),
+                        Wrap(
+                          spacing: 10,
+                          runSpacing: 10,
+                          children: ctlDepartments.map((e) {
+                            return TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  e.onSelected = !e.onSelected;
+                                });
+                              },
+                              style: ButtonStyle(
+                                padding: MaterialStateProperty.all(
+                                  const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                                ),
+                                backgroundColor: MaterialStateProperty.all(
+                                  e.onSelected
+                                      ? colorSecondary
+                                      : widget.ctl.isDarkMode
+                                          ? darkBackground
+                                          : lightBackground,
+                                ),
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: radiusFilter,
+                                    side: const BorderSide(color: colorSecondary),
+                                  ),
+                                ),
+                              ),
+                              child: Text(
+                                e.name,
+                                style: const TextStyle(fontSize: fontP, color: Colors.black),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: 50 * widget.ctl.widthFactor),
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("search_filter_grade".tr(), style: const TextStyle(fontSize: fontH4)),
+                        const SizedBox(height: 10),
+                        Wrap(
+                          spacing: 10,
+                          runSpacing: 10,
+                          children: ctlGrades.map((e) {
+                            return TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  e.onSelected = !e.onSelected;
+                                });
+                              },
+                              style: ButtonStyle(
+                                padding: MaterialStateProperty.all(
+                                  const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                                ),
+                                backgroundColor: MaterialStateProperty.all(
+                                  e.onSelected
+                                      ? colorSecondary
+                                      : widget.ctl.isDarkMode
+                                          ? darkBackground
+                                          : lightBackground,
+                                ),
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: radiusFilter,
+                                    side: const BorderSide(color: colorSecondary),
+                                  ),
+                                ),
+                              ),
+                              child: Text(
+                                e.name,
+                                style: const TextStyle(fontSize: fontP, color: Colors.black),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("search_filter_class".tr(), style: const TextStyle(fontSize: fontH4)),
+                        const SizedBox(height: 10),
+                        Wrap(
+                          spacing: 10,
+                          runSpacing: 10,
+                          children: ctlClasses.map((e) {
+                            return TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  e.onSelected = !e.onSelected;
+                                });
+                              },
+                              style: ButtonStyle(
+                                padding: MaterialStateProperty.all(
+                                  const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                                ),
+                                backgroundColor: MaterialStateProperty.all(
+                                  e.onSelected
+                                      ? colorSecondary
+                                      : widget.ctl.isDarkMode
+                                          ? darkBackground
+                                          : lightBackground,
+                                ),
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: radiusFilter,
+                                    side: const BorderSide(color: colorSecondary),
+                                  ),
+                                ),
+                              ),
+                              child: Text(
+                                e.name,
+                                style: const TextStyle(fontSize: fontP, color: Colors.black),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: 50 * widget.ctl.widthFactor),
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("search_filter_group".tr(), style: const TextStyle(fontSize: fontH4)),
+                        const SizedBox(height: 10),
+                        Wrap(
+                          spacing: 10,
+                          runSpacing: 10,
+                          children: ctlGroups.map((e) {
+                            return TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  e.onSelected = !e.onSelected;
+                                });
+                              },
+                              style: ButtonStyle(
+                                padding: MaterialStateProperty.all(
+                                  const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                                ),
+                                backgroundColor: MaterialStateProperty.all(
+                                  e.onSelected
+                                      ? colorSecondary
+                                      : widget.ctl.isDarkMode
+                                          ? darkBackground
+                                          : lightBackground,
+                                ),
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: radiusFilter,
+                                    side: const BorderSide(color: colorSecondary),
+                                  ),
+                                ),
+                              ),
+                              child: Text(
+                                e.name,
+                                style: const TextStyle(fontSize: fontP, color: Colors.black),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              Text("search_filter_language".tr(), style: const TextStyle(fontSize: fontH4)),
+              const SizedBox(height: 20),
+              Wrap(
+                spacing: 10,
+                runSpacing: 10,
+                children: ctlLanguages.map((e) {
+                  return TextButton(
+                    onPressed: () {
+                      setState(() {
+                        e.onSelected = !e.onSelected;
+                      });
+                    },
+                    style: ButtonStyle(
+                      padding: MaterialStateProperty.all(
+                        const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                      ),
+                      backgroundColor: MaterialStateProperty.all(
+                        e.onSelected
+                            ? colorSecondary
+                            : widget.ctl.isDarkMode
+                                ? darkBackground
+                                : lightBackground,
+                      ),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: radiusFilter,
+                          side: const BorderSide(color: colorSecondary),
+                        ),
+                      ),
+                    ),
+                    child: Text(
+                      e.name,
+                      style: const TextStyle(fontSize: fontP, color: Colors.black),
+                    ),
+                  );
+                }).toList(),
+              ),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  Text("search_filter_institute".tr(), style: const TextStyle(fontSize: fontH4)),
+                  const SizedBox(width: 20),
+                  SizedBox(
+                    width: 457 * widget.ctl.widthFactor,
+                    child: TextField(
+                      controller: filterInstitute,
+                      style: const TextStyle(fontSize: fontP),
+                      onChanged: (value) {
+                        ctlInstitutes = [];
+                        for (var e in institutes) {
+                          if (e.toLowerCase().contains(value.toLowerCase())) {
+                            ctlInstitutes.add(FilterController(onSelected: false, name: e));
+                          }
+                        }
+                        setState(() {});
+                      },
+                      decoration: InputDecoration(
+                        hintText: "search_filter_institute_hint".tr(),
+                        hintStyle: const TextStyle(fontSize: fontP),
+                        prefixIcon: const Image(image: AssetImage('assets/images/search/search.png'), width: 36, height: 36),
+                        suffixIcon: InkWell(
+                          onTap: () {},
+                          child: const Image(image: AssetImage('assets/images/search/mic.png'), width: 30, height: 30),
+                        ),
+                        suffixIconConstraints: const BoxConstraints.tightFor(width: 30, height: 30),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        border: OutlineInputBorder(
+                          borderRadius: radiusFilter,
+                          borderSide: const BorderSide(color: colorSecondary),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: radiusFilter,
+                          borderSide: const BorderSide(color: colorSecondary),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: radiusFilter,
+                          borderSide: const BorderSide(color: colorSecondary),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              Wrap(
+                spacing: 10,
+                runSpacing: 10,
+                children: ctlInstitutes.map((e) {
+                  return TextButton(
+                    onPressed: () {
+                      setState(() {
+                        e.onSelected = !e.onSelected;
+                      });
+                    },
+                    style: ButtonStyle(
+                      padding: MaterialStateProperty.all(
+                        const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                      ),
+                      backgroundColor: MaterialStateProperty.all(
+                        e.onSelected
+                            ? colorSecondary
+                            : widget.ctl.isDarkMode
+                                ? darkBackground
+                                : lightBackground,
+                      ),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: radiusFilter,
+                          side: const BorderSide(color: colorSecondary),
+                        ),
+                      ),
+                    ),
+                    child: Text(
+                      e.name,
+                      style: const TextStyle(fontSize: fontP, color: Colors.black),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ],
+          ),
         ),
       ],
     );
