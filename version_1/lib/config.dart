@@ -134,3 +134,63 @@ List<String> institutes = [
   'KEC-幼教系',
   'KECN-特文系在職專班'
 ];
+List<String> departmentBachelors = [
+  'AES-分理所',
+  'AIIM-AI智造暨聯網產碩專班',
+  'AMEV-電動載具先進製造產碩專班',
+  'ANTH-人類所',
+  'ASTR-天文所',
+  'BAI-智慧生醫博士學程',
+  'BME-醫工所',
+  '醫BME5-碩室',
+  'CHE-化工所',
+  'CHEM-化學系',
+  'KCSN-學前教教在職專班',
+  'KEC-幼教系',
+  'KECN-特文系在職專班'
+];
+List<String> departmentColleges = [
+  'AES-分理所',
+  'AIIM-AI智造暨聯網產碩專班',
+  'AMEV-電動載具先進製造產碩專班',
+  'ANTH-人類所',
+  'ASTR-天文所',
+  'BAI-智慧生醫博士學程',
+  'BME-醫工所',
+  '醫BME5-碩室',
+  'CHE-化工所',
+  'CHEM-化學系',
+  'KCSN-學前教教在職專班',
+  'KEC-幼教系',
+  'KECN-特文系在職專班'
+];
+List<String> departmentInstitutes = [
+  'AES-分理所',
+  'AIIM-AI智造暨聯網產碩專班',
+  'AMEV-電動載具先進製造產碩專班',
+  'ANTH-人類所',
+  'ASTR-天文所',
+  'BAI-智慧生醫博士學程',
+  'BME-醫工所',
+  '醫BME5-碩室',
+  'CHE-化工所',
+  'CHEM-化學系',
+  'KCSN-學前教教在職專班',
+  'KEC-幼教系',
+  'KECN-特文系在職專班'
+];
+List<String> departmentOthers = [
+  'AES-分理所',
+  'AIIM-AI智造暨聯網產碩專班',
+  'AMEV-電動載具先進製造產碩專班',
+  'ANTH-人類所',
+  'ASTR-天文所',
+  'BAI-智慧生醫博士學程',
+  'BME-醫工所',
+  '醫BME5-碩室',
+  'CHE-化工所',
+  'CHEM-化學系',
+  'KCSN-學前教教在職專班',
+  'KEC-幼教系',
+  'KECN-特文系在職專班'
+];
