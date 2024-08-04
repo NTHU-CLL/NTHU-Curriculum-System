@@ -1,3 +1,13 @@
+class FilterController {
+  bool onSelected;
+  String name;
+
+  FilterController({
+    required this.onSelected,
+    required this.name,
+  });
+}
+
 class SystemController {
   bool isMobile;
   bool isChinese;
