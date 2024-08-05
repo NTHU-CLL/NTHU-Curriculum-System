@@ -350,44 +350,48 @@ class _PagePrerequisiteState extends State<PagePrerequisite> {
                   const SizedBox(height: 50),
                 ],
               ),
-              const SizedBox(width: 120),
-              Column(
-                children: [
-                  const SizedBox(height: 250),
-                  anySelected
-                      ? InkWell(
-                          onTap: () {
-                            setState(() {});
-                          },
-                          child: Container(
-                            width: widget.ctl.isMobile ? 96 : 136,
-                            height: 66,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(color: colorPrimary2, borderRadius: radiusButton),
-                            child: Text(
-                              "search_start",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: widget.ctl.isMobile ? fontMobileRegular : fontH4,
+              Expanded(
+                child: Container(
+                  alignment: Alignment.centerRight,
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 250),
+                      anySelected
+                          ? InkWell(
+                              onTap: () {
+                                setState(() {});
+                              },
+                              child: Container(
+                                width: widget.ctl.isMobile ? 96 : 136,
+                                height: 66,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(color: colorPrimary2, borderRadius: radiusButton),
+                                child: Text(
+                                  "search_start",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: widget.ctl.isMobile ? fontMobileRegular : fontH4,
+                                  ),
+                                ).tr(),
                               ),
-                            ).tr(),
-                          ),
-                        )
-                      : Container(
-                          width: widget.ctl.isMobile ? 96 : 136,
-                          height: 66,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(color: colorComponent4, borderRadius: radiusButton),
-                          child: const Text(
-                            "search_start",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: fontH4,
-                            ),
-                          ).tr(),
-                        )
-                ],
-              ),
+                            )
+                          : Container(
+                              width: widget.ctl.isMobile ? 96 : 136,
+                              height: 66,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(color: colorComponent4, borderRadius: radiusButton),
+                              child: const Text(
+                                "search_start",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: fontH4,
+                                ),
+                              ).tr(),
+                            )
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
         ),
