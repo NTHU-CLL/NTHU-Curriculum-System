@@ -71,7 +71,7 @@ class _PagePrerequisiteState extends State<PagePrerequisite> {
                                   height: 48,
                                   child: TextField(
                                     controller: searchBarText,
-                                    style: const TextStyle(fontSize: fontP),
+                                    style: TextStyle(fontSize: fontP, color: widget.ctl.isDarkMode ? lightBackground : darkBackground),
                                     onChanged: (value) {
                                       ctlBachelors = [];
                                       for (var e in departmentBachelors) {
@@ -101,7 +101,7 @@ class _PagePrerequisiteState extends State<PagePrerequisite> {
                                     },
                                     decoration: InputDecoration(
                                       hintText: "rule_result".tr(),
-                                      hintStyle: const TextStyle(fontSize: fontP),
+                                      hintStyle: TextStyle(fontSize: fontP, color: widget.ctl.isDarkMode ? lightBackground : darkBackground),
                                       prefixIcon: const Image(image: AssetImage('assets/images/search/search.png'), width: 36, height: 36),
                                       suffixIcon: InkWell(
                                         onTap: () {},
@@ -166,7 +166,7 @@ class _PagePrerequisiteState extends State<PagePrerequisite> {
                                     ),
                                     child: Text(
                                       e.name,
-                                      style: const TextStyle(fontSize: fontP, color: Colors.black),
+                                      style: TextStyle(fontSize: fontP, color: widget.ctl.isDarkMode ? lightBackground : darkBackground),
                                     ),
                                   );
                                 }).toList(),
@@ -212,7 +212,7 @@ class _PagePrerequisiteState extends State<PagePrerequisite> {
                                     ),
                                     child: Text(
                                       e.name,
-                                      style: const TextStyle(fontSize: fontP, color: Colors.black),
+                                      style: TextStyle(fontSize: fontP, color: widget.ctl.isDarkMode ? lightBackground : darkBackground),
                                     ),
                                   );
                                 }).toList(),
@@ -258,7 +258,7 @@ class _PagePrerequisiteState extends State<PagePrerequisite> {
                                     ),
                                     child: Text(
                                       e.name,
-                                      style: const TextStyle(fontSize: fontP, color: Colors.black),
+                                      style: TextStyle(fontSize: fontP, color: widget.ctl.isDarkMode ? lightBackground : darkBackground),
                                     ),
                                   );
                                 }).toList(),
@@ -304,7 +304,7 @@ class _PagePrerequisiteState extends State<PagePrerequisite> {
                                     ),
                                     child: Text(
                                       e.name,
-                                      style: const TextStyle(fontSize: fontP, color: Colors.black),
+                                      style: TextStyle(fontSize: fontP, color: widget.ctl.isDarkMode ? lightBackground : darkBackground),
                                     ),
                                   );
                                 }).toList(),
