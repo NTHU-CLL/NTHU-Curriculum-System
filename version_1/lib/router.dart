@@ -33,14 +33,9 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     _tabController = TabController(
       vsync: this,
       length: tabNames.length,
+      //initialIndex: 1,
       initialIndex: tabNames.indexWhere((element) => element == widget.initialTab),
     );
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
   }
 
   @override

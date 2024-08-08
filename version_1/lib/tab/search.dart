@@ -13,7 +13,7 @@ class PageSearchClass extends StatefulWidget {
 }
 
 class _PageSearchClassState extends State<PageSearchClass> {
-  bool showFilters = true;
+  bool showFilters = false;
   String searchText = "";
   TextEditingController filterInstituteSearchBar = TextEditingController(text: "");
   List<String> searchHistory = ["123", "456", "789", "123"];
@@ -52,16 +52,14 @@ class _PageSearchClassState extends State<PageSearchClass> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: widget.ctl.isDarkMode ? darkBackground : lightBackground,
-        child: SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.symmetric(
-              vertical: widget.ctl.isMobile ? 16 : 50,
-              horizontal: widget.ctl.isMobile ? 50 : 100,
-            ),
-            child: showFilters ? searchFilter() : searchBar(),
+      backgroundColor: widget.ctl.isDarkMode ? darkBackground : lightBackground,
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            vertical: widget.ctl.isMobile ? 16 : 50,
+            horizontal: widget.ctl.isMobile ? 50 : 100,
           ),
+          child: showFilters ? searchFilter() : searchBar(),
         ),
       ),
       bottomSheet: showFilters && widget.ctl.isMobile
@@ -698,14 +696,7 @@ class _PageSearchClassState extends State<PageSearchClass> {
           children: [
             Text("search_filter_institute".tr(), style: const TextStyle(fontSize: fontH4)),
             const SizedBox(width: 20),
-            widget.ctl.isMobile
-                ? Expanded(
-                    child: filterInstitute(),
-                  )
-                : SizedBox(
-                    width: 457 * widget.ctl.widthFactor,
-                    child: filterInstitute(),
-                  )
+            widget.ctl.isMobile ? Expanded(child: filterInstitute()) : SizedBox(width: 457 * widget.ctl.widthFactor, child: filterInstitute())
           ],
         ),
         const SizedBox(height: 20),

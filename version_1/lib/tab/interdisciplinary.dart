@@ -1,3 +1,4 @@
+import '../config.dart';
 import '../object.dart';
 import 'package:flutter/material.dart';
 
@@ -14,11 +15,18 @@ class _PageInterdisciplinaryState extends State<PageInterdisciplinary> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('PageInterdisciplinary'),
-      ),
-      body: const Center(
-        child: Text('PageInterdisciplinary Page'),
+      body: Container(
+        color: widget.ctl.isDarkMode ? darkBackground : lightBackground,
+        child: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: widget.ctl.isMobile ? 20 : 245 * widget.ctl.widthFactor,
+            ),
+            child: Column(
+              children: [],
+            ),
+          ),
+        ),
       ),
     );
   }
